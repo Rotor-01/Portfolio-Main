@@ -1,6 +1,15 @@
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
+import SEO from '@/components/SEO';
+
 const About = () => {
   return (
     <main className="min-h-screen pt-24 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <SEO 
+        title="About Me" 
+        description="Learn more about Roshan Tom Robinson, a Front-End Software Developer passionate about creating impactful web solutions."
+        keywords="front-end developer, software developer, web development, react developer, portfolio"
+      />
       <div className="max-w-4xl mx-auto">
         <div className="animate-fade-in-up">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-gradient">
@@ -32,6 +41,15 @@ const About = () => {
                   I constantly seek to improve my skills and stay updated with the latest industry trends, 
                   ensuring that I can deliver modern, performant, and accessible web applications.
                 </p>
+                
+                <div className="mt-6">
+                  <Button asChild size="lg" className="hero-gradient text-white font-semibold hover:scale-105 transition-transform group gap-2">
+                    <a href="/resume/roshan-tom-robinson-resume.pdf" target="_blank" rel="noopener noreferrer" download>
+                      <Download className="h-5 w-5" />
+                      Download Resume
+                    </a>
+                  </Button>
+                </div>
               </div>
             </div>
 

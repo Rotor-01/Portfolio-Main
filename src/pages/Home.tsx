@@ -1,10 +1,42 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, FileText } from 'lucide-react';
+import SEO from '@/components/SEO';
+import { useEffect, useState } from 'react';
 
 const Home = () => {
+  const [typedText, setTypedText] = useState('');
+  const fullText = 'Building modern web experiences.';
+  
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setTypedText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+        
+        // Reset after a pause
+        setTimeout(() => {
+          currentIndex = 0;
+          const resetInterval = setInterval(() => {
+            if (currentIndex <= fullText.length) {
+              setTypedText(fullText.slice(0, currentIndex));
+              currentIndex++;
+            } else {
+              clearInterval(resetInterval);
+            }
+          }, 100);
+        }, 2000);
+      }
+    }, 100);
+    
+    return () => clearInterval(typingInterval);
+  }, []);
   return (
     <main className="min-h-screen">
+      <SEO />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Animated Background Elements */}
@@ -24,9 +56,14 @@ const Home = () => {
             <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground mb-4">
               Front-End Software Developer
             </p>
+            <div className="h-8 mb-2">
+              <p className="text-xl sm:text-2xl text-primary font-medium">
+                {typedText}<span className="animate-pulse">|</span>
+              </p>
+            </div>
             <p className="text-base sm:text-lg text-muted-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Building impactful and efficient solutions with modern web technologies.
-              Passionate about creating user-friendly and visually appealing interfaces.
+              Passionate about creating user-friendly and visually appealing interfaces
+              with modern web technologies.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
@@ -36,8 +73,14 @@ const Home = () => {
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-border/50 hover:bg-primary/10 hover:border-primary/50">
+              <Button asChild size="lg" variant="outline" className="border-border/50 hover:bg-primary/10 hover:border-primary/50 gap-2">
                 <Link to="/contact">Get In Touch</Link>
+              </Button>
+              <Button asChild size="lg" variant="secondary" className="gap-2">
+                <a href="/resume/roshan-tom-robinson-resume.pdf" target="_blank" rel="noopener noreferrer" download>
+                  <FileText className="h-5 w-5" />
+                  Resume
+                </a>
               </Button>
             </div>
 
