@@ -1,113 +1,107 @@
-import { Phone, MapPin, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import { Phone, MapPin, Mail, Github, Linkedin, Twitter, Send } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const Contact = () => {
   return (
-    <main className="min-h-screen pt-24 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream">
+      <SEO title="Contact" />
+      <div className="grain-overlay" />
+
       <div className="max-w-4xl mx-auto">
-        <div className="animate-fade-in-up mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-gradient">
-            Reach Out To Me
-          </h1>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mb-6" />
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            Have a project in mind or want to collaborate? Feel free to reach out through any of
-            the contact methods listed below.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {/* Phone */}
-          <div className="glass-panel p-6 rounded-2xl hover:scale-105 transition-all animate-fade-in-up">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-primary/20 rounded-lg">
-                <Phone className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Phone</h3>
-                <a
-                  href="tel:+916282371583"
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  +91 62823 71583
-                </a>
-              </div>
+        <div className="bg-card border border-black shadow-retro-lg animate-fade-in-up">
+          {/* Window Header */}
+          <div className="bg-pool-orange text-white px-4 py-2 border-b border-black flex items-center justify-between">
+            <span className="font-mono text-sm uppercase tracking-wider flex items-center gap-2">
+              <Send className="w-4 h-4" />
+              Comms_Link.exe
+            </span>
+            <div className="flex gap-1">
+              <div className="w-3 h-3 border border-black bg-white" />
             </div>
           </div>
 
-          {/* Email */}
-          <div className="glass-panel p-6 rounded-2xl hover:scale-105 transition-all animate-fade-in-up" style={{ animationDelay: '100ms' }}>
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-primary/20 rounded-lg">
-                <Mail className="h-6 w-6 text-primary" />
+          <div className="p-8 sm:p-12">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl sm:text-5xl font-serif font-bold italic mb-4">
+                Get In Touch
+              </h1>
+              <p className="font-mono text-muted-foreground">
+                // Initiating communication protocols...
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Contact Info Cards */}
+              <div className="space-y-6">
+                <div className="bg-white border border-black p-6 hover:shadow-retro transition-all group">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-pool-cream border border-black group-hover:bg-primary group-hover:text-white transition-colors">
+                      <Phone className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-mono font-bold uppercase mb-1">Phone</h3>
+                      <a href="tel:+916282371583" className="text-sm hover:underline">
+                        +91 62823 71583
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white border border-black p-6 hover:shadow-retro transition-all group">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-pool-cream border border-black group-hover:bg-primary group-hover:text-white transition-colors">
+                      <Mail className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-mono font-bold uppercase mb-1">Email</h3>
+                      <a href="mailto:roshantomrobinson@gmail.com" className="text-sm hover:underline break-all">
+                        roshantomrobinson@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white border border-black p-6 hover:shadow-retro transition-all group">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-pool-cream border border-black group-hover:bg-primary group-hover:text-white transition-colors">
+                      <MapPin className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-mono font-bold uppercase mb-1">Location</h3>
+                      <p className="text-sm">
+                        Kottayam, Kerala, India
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Email</h3>
-                <a
-                  href="mailto:roshantomrobinson@gmail.com"
-                  className="text-muted-foreground hover:text-primary transition-colors break-all"
-                >
-                  roshantomrobinson@gmail.com
-                </a>
+
+              {/* Social Links Grid */}
+              <div className="bg-pool-cream border border-black p-8 flex flex-col justify-center">
+                <h3 className="font-serif text-2xl font-bold italic mb-6 text-center">
+                  Social Channels
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: Github, label: 'GitHub', href: 'https://github.com/RoshanTomRobin' },
+                    { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/roshan-tom-robinson-31b47b295' },
+                    { icon: Mail, label: 'Gmail', href: 'mailto:roshantomrobinson@gmail.com' },
+                    { icon: Twitter, label: 'Twitter', href: 'https://twitter.com' },
+                  ].map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex flex-col items-center justify-center p-4 bg-white border border-black hover:shadow-retro hover:-translate-y-1 transition-all"
+                    >
+                      <social.icon className="h-6 w-6 mb-2" />
+                      <span className="font-mono text-xs uppercase">{social.label}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Location */}
-          <div className="glass-panel p-6 rounded-2xl hover:scale-105 transition-all animate-fade-in-up md:col-span-2" style={{ animationDelay: '200ms' }}>
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-primary/20 rounded-lg">
-                <MapPin className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">Location</h3>
-                <p className="text-muted-foreground">
-                  142, Kochukarottu House, Poovathilappu, Manalumkal PO,
-                  <br />
-                  Kottayam, Kerala, India - 686503
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Social Links */}
-        <div className="glass-panel p-8 rounded-2xl animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-          <h2 className="text-2xl font-bold text-foreground mb-6">Connect With Me</h2>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="mailto:roshantomrobinson@gmail.com"
-              className="flex items-center gap-3 px-6 py-3 glass-panel rounded-lg hover:scale-105 hover:bg-primary/20 transition-all group"
-            >
-              <Mail className="h-5 w-5 text-primary" />
-              <span className="font-medium group-hover:text-primary transition-colors">Gmail</span>
-            </a>
-            <a
-              href="https://github.com/RoshanTomRobin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-3 glass-panel rounded-lg hover:scale-105 hover:bg-primary/20 transition-all group"
-            >
-              <Github className="h-5 w-5 text-primary" />
-              <span className="font-medium group-hover:text-primary transition-colors">GitHub</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/roshan-tom-robinson-31b47b295"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-3 glass-panel rounded-lg hover:scale-105 hover:bg-primary/20 transition-all group"
-            >
-              <Linkedin className="h-5 w-5 text-primary" />
-              <span className="font-medium group-hover:text-primary transition-colors">LinkedIn</span>
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-3 glass-panel rounded-lg hover:scale-105 hover:bg-primary/20 transition-all group"
-            >
-              <Twitter className="h-5 w-5 text-primary" />
-              <span className="font-medium group-hover:text-primary transition-colors">Twitter</span>
-            </a>
           </div>
         </div>
       </div>

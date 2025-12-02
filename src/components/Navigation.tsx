@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Music, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [time, setTime] = useState(new Date());
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
@@ -22,80 +19,77 @@ const Navigation = () => {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
     { path: '/projects', label: 'Projects' },
     { path: '/skills', label: 'Skills' },
+    { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass-panel shadow-lg' : 'bg-transparent'
-      }`}
-    >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          <Link
-            to="/"
-            className="text-xl sm:text-2xl font-bold text-gradient hover:scale-105 transition-transform"
-          >
-            Roshan Tom Robinson
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-card border-b border-black h-14 flex items-center justify-between px-4 sm:px-6 shadow-sm">
+        {/* Left: Logo / Brand */}
+        <div className="flex items-center gap-4">
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 bg-primary flex items-center justify-center border border-black shadow-retro-sm group-hover:translate-y-0.5 group-hover:translate-x-0.5 group-hover:shadow-none transition-all">
+              <span className="text-primary-foreground font-serif italic font-bold text-xl">R</span>
+            </div>
+            <span className="font-serif font-bold text-xl tracking-tight hidden sm:block">
+              Roshan<span className="italic text-primary">.TR</span>
+            </span>
           </Link>
+        </div>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-2 lg:gap-4">
-            {navLinks.map((link) => (
-              <li key={link.path}>
-                <Link
-                  to={link.path}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                    location.pathname === link.path
-                      ? 'text-primary bg-primary/10'
-                      : 'text-foreground/80 hover:text-primary hover:bg-primary/5'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        {/* Center: Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`px-4 py-1.5 font-mono text-sm uppercase tracking-wider border border-transparent hover:border-black hover:bg-pool-cream transition-all ${location.pathname === link.path ? 'bg-black text-white border-black' : 'text-foreground'
+                }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
-          {/* Mobile Menu Button */}
+        {/* Right: Utilities / Mobile Toggle */}
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-pool-cream border border-black font-mono text-xs">
+            <Sun className="w-3 h-3" />
+            <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          </div>
+
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-foreground"
+            className="md:hidden border border-black rounded-none hover:bg-pool-cream"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
           >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
+      </header>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 glass-panel border-t border-border/50 animate-fade-in">
-            <ul className="flex flex-col p-4 space-y-2">
-              {navLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className={`block px-4 py-3 rounded-lg font-medium transition-all ${
-                      location.pathname === link.path
-                        ? 'text-primary bg-primary/10'
-                        : 'text-foreground/80 hover:text-primary hover:bg-primary/5'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </nav>
-    </header>
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden pt-16">
+          <nav className="mx-4 mt-4 bg-card border border-black shadow-retro p-4 flex flex-col gap-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`px-4 py-3 font-mono text-lg uppercase border border-transparent hover:border-black hover:bg-pool-cream transition-all ${location.pathname === link.path ? 'bg-primary text-primary-foreground border-black' : ''
+                  }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
+    </>
   );
 };
 

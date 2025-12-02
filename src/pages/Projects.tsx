@@ -7,9 +7,9 @@ const Projects = () => {
     {
       title: 'PC Part Picker',
       description:
-        'A comprehensive web application designed to help users find compatible PC components for their custom builds. Features real-time compatibility checking, price comparisons, and a user-friendly interface for building your dream PC.',
-      technologies: ['React', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Prisma'],
-      tag: 'Featured Project',
+        'A comprehensive web application designed to help users find compatible PC components for their custom builds. Features real-time compatibility checking, price comparisons, and a user-friendly interface.',
+      technologies: ['React', 'Next.js', 'Tailwind', 'TypeScript', 'Prisma'],
+      tag: 'Featured',
       liveUrl: 'https://part-picker-theta.vercel.app',
       githubUrl: 'https://github.com/RoshanTomRobin/part-picker',
       imageUrl: placeholderImages.pcPartPicker,
@@ -28,7 +28,7 @@ const Projects = () => {
       description:
         'A dynamic data visualization dashboard featuring real-time analytics, interactive charts, and comprehensive reporting tools for business intelligence.',
       technologies: ['JavaScript', 'D3.js', 'Chart.js', 'React'],
-      tag: 'Dashboard',
+      tag: 'Data Viz',
       liveUrl: 'https://dashboard-demo.vercel.app',
       imageUrl: placeholderImages.dashboard,
     },
@@ -36,37 +36,37 @@ const Projects = () => {
       title: 'Portfolio Website',
       description:
         'A modern, responsive portfolio website showcasing projects and skills with smooth animations, optimized performance, and excellent accessibility.',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-      tag: 'Web Design',
+      technologies: ['React', 'TypeScript', 'Tailwind', 'Vite'],
+      tag: 'Web',
       githubUrl: 'https://github.com/RoshanTomRobin/Portfolio',
       imageUrl: placeholderImages.portfolio,
     },
   ];
 
   return (
-    <main className="min-h-screen pt-24 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-      <SEO 
-        title="Projects" 
+    <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream">
+      <SEO
+        title="Projects"
         description="Explore my portfolio of web development projects including PC Part Picker, ChatBot AI, and more."
-        keywords="web developer portfolio, react projects, frontend projects, PC Part Picker, web applications"
       />
-      <div className="max-w-6xl mx-auto">
-        <div className="animate-fade-in-up mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-gradient">
-            My Projects
+      <div className="grain-overlay" />
+
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl sm:text-5xl font-serif font-bold mb-4 italic text-foreground">
+            Selected Works
           </h1>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mb-6" />
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            Here are some of the projects I've worked on, showcasing my skills in web development,
-            AI, and API integration.
+          <div className="w-24 h-1 bg-primary mx-auto mb-6" />
+          <p className="text-lg font-mono text-muted-foreground max-w-2xl mx-auto">
+            // A curated collection of digital experiences and applications.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className="animate-fade-in-up"
+              className="animate-fade-in-up h-full"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <ProjectCard {...project} />

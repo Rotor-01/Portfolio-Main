@@ -1,38 +1,22 @@
 interface SkillBadgeProps {
   name: string;
-  icon?: string;
   delay?: number;
 }
 
 const SkillBadge = ({ name, delay = 0 }: SkillBadgeProps) => {
   return (
     <div
-      className="glass-panel px-6 py-4 rounded-xl hover:scale-110 hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 cursor-pointer animate-fade-in-up group"
+      className="group relative inline-block animate-fade-in-up"
       style={{ animationDelay: `${delay}ms` }}
     >
-      <div className="flex flex-col items-center gap-2">
-        <span className="text-4xl sm:text-5xl group-hover:scale-110 transition-transform">
-          {getSkillEmoji(name)}
-        </span>
-        <span className="font-semibold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors">
+      <div className="absolute inset-0 bg-black translate-x-1 translate-y-1 transition-transform group-hover:translate-x-1.5 group-hover:translate-y-1.5" />
+      <div className="relative bg-white border border-black px-4 py-2 flex items-center justify-center transition-transform group-hover:-translate-y-0.5 group-hover:-translate-x-0.5">
+        <span className="font-mono text-sm font-bold uppercase tracking-wider text-foreground">
           {name}
         </span>
       </div>
     </div>
   );
-};
-
-const getSkillEmoji = (skill: string): string => {
-  const emojiMap: Record<string, string> = {
-    HTML5: '📄',
-    CSS3: '🎨',
-    JavaScript: '⚡',
-    Python: '🐍',
-    Lua: '🌙',
-    React: '⚛️',
-    TypeScript: '💠',
-  };
-  return emojiMap[skill] || '💻';
 };
 
 export default SkillBadge;
