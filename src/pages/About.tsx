@@ -40,7 +40,7 @@ const About = () => {
                 <div className="space-y-4 font-sans text-lg leading-relaxed text-muted-foreground">
                   <p>
                     Hello! I'm <span className="font-bold text-primary">Roshan Tom Robinson</span>,
-                    a front-end software developer with a passion for retro aesthetics and modern performance.
+                    a full stack software developer with a passion for retro aesthetics and modern performance.
                   </p>
                   <p>
                     I specialize in building accessible, pixel-perfect web applications using

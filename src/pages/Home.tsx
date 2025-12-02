@@ -57,7 +57,7 @@ const Home = () => {
             </h1>
 
             <p className="text-xl sm:text-2xl font-mono text-muted-foreground mb-8">
-              Front-End Software Developer
+              Full Stack Software Developer
             </p>
 
             <div className="h-8 mb-8 font-mono text-sm sm:text-base text-primary">
