@@ -2,8 +2,8 @@
 
 ## 1. Project Overview
 **Name**: `roshan-portfolio`
-**Description**: A modern, responsive portfolio website for Roshan Tom Robinson, a Front-End Software Developer. It showcases projects, skills, and contact information using a sleek, dark-themed design with glassmorphism effects and smooth animations.
-**Version**: 1.0.0
+**Description**: A professional developer portfolio with a distinctive "Internet Summer" / Retro Macintosh aesthetic inspired by Poolsuite. It combines nostalgic design elements (window-style containers, pixel fonts, grain overlays) with modern web technologies to showcase projects and skills.
+**Version**: 2.0.0 (Redesign)
 **License**: © 2024 Roshan Tom Robinson
 
 ## 2. Tech Stack
@@ -16,14 +16,14 @@
 ### Styling & Design
 - **Tailwind CSS**: Utility-first CSS framework
 - **Tailwind CSS Animate**: Animation utilities
-- **Radix UI**: Headless UI primitives (Dialog, Slot, Toast, Tooltip)
+- **Radix UI**: Headless UI primitives (Slot, etc.)
 - **Lucide React**: Icon library
 - **Class Variance Authority (CVA)**: Component variant management
 - **clsx & tailwind-merge**: Class name utility helpers
 
 ### Routing & State
 - **React Router DOM**: Client-side routing
-- **TanStack Query**: Data fetching and state management (setup but not heavily used yet)
+- **TanStack Query**: Data fetching and state management (setup available)
 - **React Helmet Async**: SEO and meta tag management
 
 ## 3. Project Structure
@@ -41,24 +41,24 @@ Portfolio-Main/
 ├── src/
 │   ├── components/          # Reusable UI components
 │   │   ├── ui/              # Shadcn/UI base components (Button, Badge, etc.)
-│   │   ├── Navigation.tsx   # Main responsive navigation bar
-│   │   ├── ProjectCard.tsx  # Card component for project display
+│   │   ├── Navigation.tsx   # Top "Menu Bar" navigation
+│   │   ├── ProjectCard.tsx  # "Application Window" style project card
 │   │   ├── SEO.tsx          # Meta tag wrapper component
-│   │   └── SkillBadge.tsx   # Badge component for skills
+│   │   └── SkillBadge.tsx   # Retro tag style skill badge
 │   ├── hooks/               # Custom React hooks
 │   │   └── use-toast.ts     # Toast notification hook
 │   ├── lib/                 # Utilities and helpers
-│   │   ├── placeholderImages.ts # Base64 placeholder images
+│   │   ├── placeholderImages.ts # Base64 placeholder images (Retro Palette)
 │   │   └── utils.ts         # cn() utility for class merging
 │   ├── pages/               # Route components
-│   │   ├── About.tsx        # About page
-│   │   ├── Contact.tsx      # Contact page
-│   │   ├── Home.tsx         # Landing page
+│   │   ├── About.tsx        # "UserProfile.dat" window style page
+│   │   ├── Contact.tsx      # "Comms_Link.exe" window style page
+│   │   ├── Home.tsx         # "Desktop" style landing page
 │   │   ├── NotFound.tsx     # 404 Error page
-│   │   ├── Projects.tsx     # Projects listing page
-│   │   └── Skills.tsx       # Skills listing page
+│   │   ├── Projects.tsx     # Grid of project windows
+│   │   └── Skills.tsx       # Folder-style skills listing
 │   ├── App.tsx              # Main app component & Routing
-│   ├── index.css            # Global styles & Tailwind directives
+│   ├── index.css            # Global styles, fonts, and retro utilities
 │   └── main.tsx             # Application entry point
 ├── .gitignore               # Git ignore rules
 ├── GEMINI.md                # Project documentation (this file)
@@ -83,9 +83,10 @@ Portfolio-Main/
 ### `tailwind.config.ts`
 - **Dark Mode**: Class-based
 - **Theme Extension**:
-    - **Colors**: Custom HSL variables (primary, secondary, accent, background, etc.)
-    - **Font**: Inter
-    - **Animations**: `accordion-down`, `accordion-up`, `fade-in-up`, `fade-in`, `slide-in`, `pulse-glow`
+    - **Colors**: Custom Poolsuite-inspired palette (Cream, Forest Green, Sunset Orange).
+    - **Font**: `Instrument Serif` (Headings), `Inter` (Body), `Space Mono` (UI).
+    - **Shadows**: `retro`, `retro-sm`, `retro-lg` (Hard, non-blurred shadows).
+    - **Animations**: `marquee`, `fade-in-up`, `fade-in`, `slide-in`.
 - **Content Paths**: Scans `pages`, `components`, `app`, `src`
 
 ### `package.json` Scripts
@@ -94,48 +95,49 @@ Portfolio-Main/
 - `preview`: Preview production build
 - `lint`: Run ESLint
 
-## 5. Design System
+## 5. Design System (Poolsuite Aesthetic)
 
-### Color Palette (HSL)
-Defined in `src/index.css`:
-- **Background**: Dark Green/Black (`145 45% 8%`)
-- **Primary**: Vibrant Green (`145 65% 45%`)
-- **Accent**: Lighter Green (`145 60% 55%`)
-- **Text**: Off-white (`145 20% 98%`)
-- **Glassmorphism**: Used for cards and nav (`bg-glass-background` with blur)
+### Color Palette
+- **Background**: Warm Cream (`#f4f1ea` / `hsl(40 30% 94%)`)
+- **Primary**: Forest Green (`#2d5a27` / `hsl(113 40% 25%)`)
+- **Secondary**: Sunset Orange (`#ff6b4a` / `hsl(11 100% 65%)`)
+- **Accent**: Retro Blue (`#4a90e2` / `hsl(212 72% 59%)`)
+- **Text**: Almost Black (`#1a1a1a` / `hsl(0 0% 10%)`)
 
 ### Typography
-- **Font Family**: Inter, system-ui, sans-serif
-- **Headings**: Bold, often using `text-gradient` (primary to accent)
+- **Headings**: `Instrument Serif` (often italicized for elegance).
+- **Body**: `Inter` (clean readability).
+- **UI/Code**: `Space Mono` (retro computing feel).
 
-### Global Styles
-- **Glass Panel**: `.glass-panel` utility class for translucent backgrounds with blur and border.
-- **Text Gradient**: `.text-gradient` for gradient text effects.
-- **Animations**: Fade-in up, slide-in, and pulse glow effects are globally available.
+### Visual Elements
+- **Windows**: Content contained in bordered boxes with "title bars".
+- **Shadows**: Hard, directional shadows (`4px 4px 0px black`) simulating early GUI depth.
+- **Grain**: Subtle noise overlay (`.grain-overlay`) for texture.
+- **Marquee**: Scrolling text footer for announcements.
 
 ## 6. Routing & Navigation
 
 ### Routes (`src/App.tsx`)
 | Path | Component | Description |
 |------|-----------|-------------|
-| `/` | `Home` | Landing page with hero section |
-| `/about` | `About` | Personal bio and download resume |
-| `/projects` | `Projects` | Portfolio of work |
-| `/skills` | `Skills` | Technical skills showcase |
-| `/contact` | `Contact` | Contact information |
+| `/` | `Home` | Desktop-style landing page with "Welcome.sys" window |
+| `/about` | `About` | "UserProfile.dat" window with bio and resume |
+| `/projects` | `Projects` | Grid of "Application Windows" showcasing work |
+| `/skills` | `Skills` | Categorized "Folders" of technical skills |
+| `/contact` | `Contact` | "Comms_Link.exe" window for contact info |
 | `*` | `NotFound` | 404 Catch-all route |
 
 ### Navigation (`src/components/Navigation.tsx`)
-- **Responsive**: Hamburger menu on mobile, horizontal list on desktop.
-- **State**: Tracks scroll position to toggle glass effect (`scrolled > 20px`).
-- **Active State**: Highlights current route.
+- **Desktop**: Fixed top "Menu Bar" (File, Edit, View style) with clock.
+- **Mobile**: Hamburger menu opening a dropdown list.
+- **Style**: Retro OS menu bar, borders, and hover effects.
 
 ## 7. Components Detail
 
 ### `ProjectCard.tsx`
-- Displays project title, description, tags, and image.
-- **Props**: `title`, `description`, `technologies`, `tag`, `liveUrl`, `githubUrl`, `imageUrl`.
-- **Features**: Hover effects, external links, fallback for broken images.
+- **Style**: "Application Window" with title bar controls (minimize, maximize, close).
+- **Content**: Image with dither effect simulation, title, description, and tech stack.
+- **Actions**: "Run" (Live Preview) and "Source" (GitHub) buttons.
 
 ### `SEO.tsx`
 - Wraps `react-helmet-async`.
@@ -143,40 +145,43 @@ Defined in `src/index.css`:
 - **Function**: Sets `<title>`, `<meta>` tags for SEO and Open Graph sharing.
 
 ### `SkillBadge.tsx`
-- **Props**: `name`, `delay`.
-- **Function**: Displays a skill name in a styled badge with a fade-in animation delay.
+- **Style**: Retro tag/pill with hard border and hover offset animation.
+- **Animation**: Staggered fade-in entrance.
+
+### `ui/button.tsx`
+- **Style**: Sharp corners (`rounded-none`), hard borders, and retro shadows.
+- **Variants**: Default (Primary), Outline (White), Ghost (Transparent).
 
 ## 8. Pages Detail
 
 ### `Home.tsx`
-- **Hero Section**: "Hi, I'm Roshan Tom Robinson".
-- **Typing Effect**: Cycles through "Building modern web experiences."
-- **Call to Action**: Links to Projects, Contact, and Resume.
-- **Socials**: GitHub, LinkedIn, Email links.
+- **Layout**: "Desktop" environment.
+- **Hero**: Central "Welcome" window.
+- **Footer**: Scrolling marquee text.
+- **Background**: Dot grid pattern with grain overlay.
 
 ### `About.tsx`
-- **Bio**: Detailed introduction.
-- **Resume**: Download button for PDF resume.
-- **Highlights**: List of services (Responsive Design, UI/UX, etc.).
+- **Layout**: "User Profile" window.
+- **Content**: Bio, Resume download, and Services list.
+- **Visuals**: "Avatar" placeholder with retro styling.
 
 ### `Projects.tsx`
-- **Data**: Static array of project objects (PC Part Picker, ChatBot AI, etc.).
-- **Display**: Grid of `ProjectCard` components.
-- **Images**: Uses Base64 placeholders from `src/lib/placeholderImages.ts`.
+- **Layout**: Grid of `ProjectCard` components.
+- **Header**: "Selected Works" with retro typography.
 
 ### `Skills.tsx`
-- **List**: HTML5, CSS3, JS, Python, Lua, React, TypeScript.
-- **Display**: Grid of `SkillBadge` components.
+- **Layout**: Stack of "Folder" containers for different skill categories.
+- **Content**: `SkillBadge` grid within each category.
 
 ### `Contact.tsx`
-- **Info**: Phone, Email, Location.
-- **Socials**: Repeated social links.
-- **Layout**: Grid layout with glass panels.
+- **Layout**: "Communications" window.
+- **Content**: Contact info cards (Phone, Email, Location) and Social Links grid.
 
 ## 9. Utilities
 
 ### `src/lib/utils.ts`
-- `cn(...inputs)`: Merges Tailwind classes using `clsx` and `tailwind-merge` to resolve conflicts.
+- `cn(...inputs)`: Merges Tailwind classes using `clsx` and `tailwind-merge`.
 
 ### `src/lib/placeholderImages.ts`
-- Exports `placeholderImages` object containing Base64 SVG strings for project previews (PC Part Picker, Chatbot, Dashboard, Portfolio).
+- Exports `placeholderImages` object containing Base64 SVG strings.
+- **Update**: Colors updated to match the new Cream/Green/Orange palette.
