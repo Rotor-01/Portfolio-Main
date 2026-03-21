@@ -8,9 +8,27 @@ const Home = () => {
   const [typedText, setTypedText] = useState('');
   const fullText = 'Building_modern_web_experiences...';
 
-  const [timeElapsed, setTimeElapsed] = useState(0);
-  const [localClicks, setLocalClicks] = useState(0);
-  const [globalClicks, setGlobalClicks] = useState<number | null>(null);
+  const [timeElapsed, setTimeElapsed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio_time_elapsed');
+      if (saved) return parseInt(saved, 10);
+    }
+    return 0;
+  });
+  const [localClicks, setLocalClicks] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio_local_clicks');
+      if (saved) return parseInt(saved, 10);
+    }
+    return 0;
+  });
+  const [globalClicks, setGlobalClicks] = useState<number | null>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio_global_clicks');
+      if (saved) return parseInt(saved, 10);
+    }
+    return null;
+  });
   const pendingClicks = useRef(0);
 
   useEffect(() => {
@@ -29,20 +47,32 @@ const Home = () => {
     }, 1000);
 
     // Fetch initial global clicks
-    fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks')
+    fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks', { cache: 'no-store' })
       .then(res => res.json())
       .then(data => {
         if (data && typeof data.count === 'number') {
-          setGlobalClicks(data.count);
+          setGlobalClicks(prev => {
+            const current = prev !== null ? prev : 0;
+            if (current > data.count) {
+              // Server missed some clicks (probably refreshed before queue emptied). 
+              // Force server to catch up to our known state!
+              fetch(`https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks/set?count=${current}`, { cache: 'no-store' }).catch(() => {});
+              return current;
+            }
+            return data.count; // Server is ahead or equal, sync to server
+          });
         } else {
-          setGlobalClicks(1420069);
+          setGlobalClicks(prev => prev !== null ? prev : 1420069);
         }
       })
-      .catch(() => setGlobalClicks(1420069));
+      .catch((err) => {
+        console.error('Counter API Initial Fetch Error:', err);
+        setGlobalClicks(prev => prev !== null ? prev : 1420069);
+      });
 
     // Poll for global updates from others every 10 seconds
     const pollInterval = setInterval(() => {
-      fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks')
+      fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks', { cache: 'no-store' })
         .then(res => res.json())
         .then(data => {
           if (data && typeof data.count === 'number') {
@@ -59,14 +89,24 @@ const Home = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio_local_clicks', localClicks.toString());
+      localStorage.setItem('portfolio_time_elapsed', timeElapsed.toString());
+      if (globalClicks !== null) {
+        localStorage.setItem('portfolio_global_clicks', globalClicks.toString());
+      }
+    }
+  }, [localClicks, timeElapsed, globalClicks]);
+
   // Process queued clicks to the API without rate limiting the browser
   useEffect(() => {
     const processQueue = setInterval(() => {
       if (pendingClicks.current > 0) {
         pendingClicks.current -= 1;
-        fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks/up')
-          .catch(() => {
-            // silently fail rather than retrying forever
+        fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks/up', { cache: 'no-store' })
+          .catch((err) => {
+            console.error('Counter API Up Error:', err);
           });
       }
     }, 500);
