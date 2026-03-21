@@ -1,12 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, Linkedin, Mail, FileText, Terminal } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, FileText, Terminal, MousePointerClick, Clock, GitCommit } from 'lucide-react';
 import SEO from '@/components/SEO';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const Home = () => {
   const [typedText, setTypedText] = useState('');
   const fullText = 'Building_modern_web_experiences...';
+
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [localClicks, setLocalClicks] = useState(0);
+  const [globalClicks, setGlobalClicks] = useState<number | null>(null);
+  const pendingClicks = useRef(0);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -18,8 +23,72 @@ const Home = () => {
         clearInterval(typingInterval);
       }
     }, 100);
-    return () => clearInterval(typingInterval);
+
+    const timeInterval = setInterval(() => {
+      setTimeElapsed(prev => prev + 1);
+    }, 1000);
+
+    // Fetch initial global clicks
+    fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks')
+      .then(res => res.json())
+      .then(data => {
+        if (data && typeof data.count === 'number') {
+          setGlobalClicks(data.count);
+        } else {
+          setGlobalClicks(1420069);
+        }
+      })
+      .catch(() => setGlobalClicks(1420069));
+
+    // Poll for global updates from others every 10 seconds
+    const pollInterval = setInterval(() => {
+      fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks')
+        .then(res => res.json())
+        .then(data => {
+          if (data && typeof data.count === 'number') {
+            setGlobalClicks(prev => Math.max(prev || 0, data.count));
+          }
+        })
+        .catch(() => {});
+    }, 10000);
+
+    return () => {
+      clearInterval(typingInterval);
+      clearInterval(timeInterval);
+      clearInterval(pollInterval);
+    };
   }, []);
+
+  // Process queued clicks to the API without rate limiting the browser
+  useEffect(() => {
+    const processQueue = setInterval(() => {
+      if (pendingClicks.current > 0) {
+        pendingClicks.current -= 1;
+        fetch('https://api.counterapi.dev/v1/roshantomrobinson/portfolio_clicks/up')
+          .catch(() => {
+            // silently fail rather than retrying forever
+          });
+      }
+    }, 500);
+
+    return () => clearInterval(processQueue);
+  }, []);
+
+  useEffect(() => {
+    const handleClick = () => {
+      setLocalClicks(prev => prev + 1);
+      setGlobalClicks(prev => (prev || 0) + 1);
+      pendingClicks.current += 1;
+    };
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, []);
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  };
 
   return (
     <main className="min-h-screen pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream relative overflow-hidden">
@@ -47,9 +116,6 @@ const Home = () => {
 
           {/* Window Body */}
           <div className="p-8 sm:p-12 md:p-16 text-center">
-            <div className="inline-block mb-6 px-4 py-1 border border-black rounded-full bg-pool-orange/20 text-pool-orange font-mono text-xs uppercase tracking-widest">
-              Available for hire
-            </div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight italic text-foreground">
               Roshan Tom <br className="hidden sm:block" />
@@ -100,15 +166,78 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Marquee Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-primary text-primary-foreground border-t border-black py-2 overflow-hidden z-20">
-        <div className="animate-marquee whitespace-nowrap font-mono text-xs uppercase tracking-widest flex gap-8">
-          <span>*** REACT *** TYPESCRIPT *** TAILWIND *** NEXT.JS *** UI/UX ***</span>
-          <span>*** OPEN TO WORK *** CONTACT ME TODAY ***</span>
-          <span>*** REACT *** TYPESCRIPT *** TAILWIND *** NEXT.JS *** UI/UX ***</span>
-          <span>*** OPEN TO WORK *** CONTACT ME TODAY ***</span>
-          <span>*** REACT *** TYPESCRIPT *** TAILWIND *** NEXT.JS *** UI/UX ***</span>
-          <span>*** OPEN TO WORK *** CONTACT ME TODAY ***</span>
+      {/* Notepad Projects Window */}
+      <div className="max-w-4xl mx-auto relative z-10 mt-12 mb-20">
+        <div className="bg-[#fdfbf7] border border-black shadow-retro-lg animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          {/* Notepad Header */}
+          <div className="bg-pool-cream text-foreground px-4 py-2 border-b border-black flex items-center justify-between">
+            <span className="font-mono text-sm uppercase tracking-wider flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              ideas.txt
+            </span>
+            <div className="flex gap-1">
+              <div className="w-3 h-3 border border-black bg-white" />
+              <div className="w-3 h-3 border border-black bg-white" />
+            </div>
+          </div>
+
+          {/* Notepad Body */}
+          <div className="p-8 sm:p-10 font-mono text-sm sm:text-base text-foreground leading-relaxed relative">
+            <div className="absolute left-8 top-0 bottom-0 w-px bg-pool-orange/30 hidden sm:block"></div>
+            <div className="sm:pl-8 space-y-6">
+              <p className="text-muted-foreground italic mb-6">// Hardware & Software Projects in the Pipeline</p>
+              
+              <div className="group flex items-start gap-4">
+                <span className="text-pool-orange mt-1 hidden sm:block">]</span>
+                <div>
+                  <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Smart Beyblade</h3>
+                  <p className="text-muted-foreground text-sm">Integrating real-time RPM tracking, impact forces, and Bluetooth telemetry into a custom chassis for data-driven battles.</p>
+                </div>
+              </div>
+
+              <div className="group flex items-start gap-4">
+                <span className="text-pool-orange mt-1 hidden sm:block">]</span>
+                <div>
+                  <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Y2K Car Radio Restomod</h3>
+                  <p className="text-muted-foreground text-sm">A 90s/00s themed automotive head unit built from scratch. Features tactile retro buttons alongside modern CarPlay/Android Auto integration over wireless.</p>
+                </div>
+              </div>
+
+              <div className="group flex items-start gap-4">
+                <span className="text-pool-orange mt-1 hidden sm:block">]</span>
+                <div>
+                  <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Winamp-Style Spotify Desktop Client</h3>
+                  <p className="text-muted-foreground text-sm">A fully functional, lightweight music player connecting to Spotify APIs, featuring modular nostalgic skins inspired by early 2000s software aesthetics.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* InfoShower Footer */}
+      <div className="fixed bottom-0 left-0 right-0 bg-primary text-primary-foreground border-t border-black py-2 px-4 lg:px-8 z-20 flex flex-wrap items-center justify-between font-mono text-xs uppercase tracking-widest">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2" title="Session Time Elapsed">
+            <Clock className="w-4 h-4 text-pool-orange" />
+            <span>SESSION: {formatTime(timeElapsed)}</span>
+          </div>
+          <div className="hidden sm:flex items-center gap-2" title="Latest Commit">
+            <GitCommit className="w-4 h-4 text-pool-orange" />
+            <a href="https://github.com/RoshanTomRobin/Portfolio" target="_blank" rel="noreferrer" className="hover:text-pool-cream hover:underline transition-all">
+              b5f95e5
+            </a>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 select-none" title="Click anywhere to increase!">
+            <MousePointerClick className="w-4 h-4 text-pool-orange" />
+            <span>CLICKS: {globalClicks !== null ? globalClicks.toLocaleString() : '...'} <span className="text-pool-orange/80">({localClicks})</span></span>
+          </div>
+          <div className="hidden md:flex items-center gap-2">
+            <span className="text-pool-orange animate-pulse">●</span> SYSTEM ONLINE
+          </div>
         </div>
       </div>
     </main>
