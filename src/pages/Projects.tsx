@@ -8,9 +8,9 @@ const Projects = () => {
       description:
         'A digital memorial for beloved internet memes. Browse through internet history and pay respects to the classics.',
       technologies: ['React', 'Next.js', 'Tailwind'],
-      tag: 'Live',
+      tag: 'Closed Source / Inactive',
       liveUrl: 'https://meme-memorial.vercel.app',
-      imageUrl: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y0ZjFlYSIvPjx0ZXh0IHg9IjQwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iJ0NvdXJpZXIgTmV3JywgbW9ub3NwYWNlIiBmb250LXdlaWdodD0iYm9sZCIgZm9udC1zaXplPSIzMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJkNWEyNyI+TUVNRSBNRU1PUklBTDwvdGV4dD48L3N2Zz4=',
+      imageUrl: '/images/projects/cubes.png',
     },
   ];
 

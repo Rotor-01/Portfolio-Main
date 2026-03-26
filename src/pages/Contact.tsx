@@ -1,7 +1,9 @@
 import { Phone, MapPin, Mail, Github, Linkedin, Twitter, Send } from 'lucide-react';
 import SEO from '@/components/SEO';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
+  const { toast } = useToast();
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream">
       <SEO title="Contact" />
@@ -40,9 +42,16 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-mono font-bold uppercase mb-1">Phone</h3>
-                      <a href="tel:+916282371583" className="text-sm hover:underline">
+                      <button 
+                        onClick={() => {
+                          navigator.clipboard.writeText('+916282371583');
+                          toast({ title: 'Copied to clipboard', description: '+91 62823 71583' });
+                        }}
+                        className="text-sm hover:underline text-left transition-colors hover:text-pool-orange"
+                        title="Copy to clipboard"
+                      >
                         +91 62823 71583
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -54,9 +63,16 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-mono font-bold uppercase mb-1">Email</h3>
-                      <a href="mailto:roshantomrobinson@gmail.com" className="text-sm hover:underline break-all">
-                        roshantomrobinson@gmail.com
-                      </a>
+                      <button 
+                        onClick={() => {
+                          navigator.clipboard.writeText('roshantomrobinson@gmail.com');
+                          toast({ title: 'Copied to clipboard', description: 'roshantomrobinson@gmail.com' });
+                        }}
+                        className="text-sm hover:underline text-left transition-colors hover:text-pool-orange"
+                        title="Copy to clipboard"
+                      >
+                        roshantomrobinson [at] gmail [dot] com
+                      </button>
                     </div>
                   </div>
                 </div>

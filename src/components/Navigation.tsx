@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun } from 'lucide-react';
+import { Menu, X, Sun, GitBranch } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
@@ -60,6 +60,16 @@ const Navigation = () => {
             <Sun className="w-3 h-3" />
             <span>{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
           </div>
+
+          <a
+            href="https://github.com/Rotor-01/Portfolio-Main"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden p-1.5 border border-transparent hover:border-black rounded-none hover:bg-pool-cream text-foreground transition-all"
+            aria-label="GitHub Repository"
+          >
+            <GitBranch className="w-5 h-5" />
+          </a>
 
           <Button
             variant="ghost"

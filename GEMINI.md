@@ -1,189 +1,70 @@
-# Roshan Tom Robinson - Portfolio Website
+# Roshan Tom Robinson - Portfolio Architecture
 
 > **Development Note**: I built the baseline architecture, core logic, and the vast majority of this website by hand. Advanced AI assistants (Google Gemini) were used collaboratively strictly to maximize efficiency, accelerate styling iterations for the bento-grid, and assist with rapid debugging.
 
 ## 1. Project Overview
 **Name**: `roshan-portfolio`
-**Description**: A professional developer portfolio with a distinctive "Internet Summer" / Retro Macintosh aesthetic inspired by Poolsuite. It combines nostalgic design elements (window-style containers, pixel fonts, grain overlays) with modern web technologies to showcase projects and skills.
-**Version**: 2.0.0 (Redesign)
-**License**: © 2024 Roshan Tom Robinson
+**Description**: A professional developer portfolio showcasing my transition into Computer Engineering, emphasizing AI hardware and high-performance networking. It features a responsive Bento Box dashboard layout wrapped in a premium "Internet Summer" Poolsuite-inspired aesthetic with state-based theming.
+**Version**: 2.5.0 (Bento Redesign & Theming)
 
-## 2. Tech Stack
-
-### Core Framework & Language
-- **React 18**: UI Library
-- **TypeScript**: Type safety and developer experience
-- **Vite**: Build tool and development server
-
-### Styling & Design
-- **Tailwind CSS**: Utility-first CSS framework
-- **Tailwind CSS Animate**: Animation utilities
-- **Radix UI**: Headless UI primitives (Slot, etc.)
-- **Lucide React**: Icon library
-- **Class Variance Authority (CVA)**: Component variant management
-- **clsx & tailwind-merge**: Class name utility helpers
-
-### Routing & State
+## 2. Tech Stack Setup
+- **React 18**: UI Library & Component Architecture
+- **TypeScript**: Type safety for robust component props
+- **Vite**: Build tool and dev server
+- **Tailwind CSS**: Utility-first CSS styling leveraging custom grid layouts
+- **Lucide React**: Clean vector icon suite
 - **React Router DOM**: Client-side routing
-- **TanStack Query**: Data fetching and state management (setup available)
-- **React Helmet Async**: SEO and meta tag management
+- **TanStack Query & Helmet Async**: Utility state and SEO config
 
 ## 3. Project Structure
-
 ```
 Portfolio-Main/
-├── .agent/                  # Agent workflows
-├── public/                  # Static assets
-│   ├── images/              # Project images
-│   ├── resume/              # Resume PDF
-│   ├── favicon.ico          # Favicon
-│   ├── robots.txt           # SEO robots file
-│   ├── sitemap.xml          # SEO sitemap
-│   └── site.webmanifest     # PWA manifest
+├── public/                  # Static assets & dynamic SVG favicons
 ├── src/
-│   ├── components/          # Reusable UI components
-│   │   ├── ui/              # Shadcn/UI base components (Button, Badge, etc.)
-│   │   ├── Navigation.tsx   # Top "Menu Bar" navigation
-│   │   ├── ProjectCard.tsx  # "Application Window" style project card
-│   │   ├── SEO.tsx          # Meta tag wrapper component
-│   │   └── SkillBadge.tsx   # Retro tag style skill badge
-│   ├── hooks/               # Custom React hooks
-│   │   └── use-toast.ts     # Toast notification hook
-│   ├── lib/                 # Utilities and helpers
-│   │   ├── placeholderImages.ts # Base64 placeholder images (Retro Palette)
-│   │   └── utils.ts         # cn() utility for class merging
-│   ├── pages/               # Route components
-│   │   ├── About.tsx        # "UserProfile.dat" window style page
-│   │   ├── Contact.tsx      # "Comms_Link.exe" window style page
-│   │   ├── Home.tsx         # "Desktop" style landing page
-│   │   ├── NotFound.tsx     # 404 Error page
-│   │   ├── Projects.tsx     # Grid of project windows
-│   │   └── Skills.tsx       # Folder-style skills listing
-│   ├── App.tsx              # Main app component & Routing
-│   ├── index.css            # Global styles, fonts, and retro utilities
-│   └── main.tsx             # Application entry point
-├── .gitignore               # Git ignore rules
+│   ├── components/
+│   │   ├── BentoCard.tsx    # Reusable grid tiles spanning dynamic columns
+│   │   ├── ThemeProvider.tsx# Context state manager for dynamic themes
+│   │   ├── Navigation.tsx   # Top Navigation bar
+│   │   ├── ProjectCard.tsx  # Interactive project components
+│   │   ├── SEO.tsx          # Dynamic SEO wrappers
+│   │   └── SkillBadge.tsx   # Retro skill indicator tag
+│   ├── pages/               
+│   │   ├── Home.tsx         # Bento Grid Dashboard
+│   │   ├── About.tsx        # Bio & Engineeering Profile
+│   │   ├── Contact.tsx      # Socials & Email routing
+│   │   ├── Projects.tsx     # Extended Works
+│   │   └── Skills.tsx       # Hardware, Python, Infrastructure logic 
+│   ├── App.tsx              # Application entry integrating Context
+│   └── index.css            # Custom CSS vars & Theme overrides
+├── README.md                # Markdown showcase
 ├── GEMINI.md                # Project documentation (this file)
-├── index.html               # HTML entry point
-├── package.json             # Dependencies and scripts
-├── postcss.config.js        # PostCSS configuration
-├── README.md                # Project README
-├── tailwind.config.ts       # Tailwind configuration
-├── tsconfig.json            # TypeScript configuration
-├── tsconfig.node.json       # TypeScript node configuration
-├── vercel.json              # Vercel deployment config
-└── vite.config.ts           # Vite configuration
+└── tailwind.config.ts       # Poolsuite variable mapping config
 ```
 
-## 4. Key Configuration
+## 4. Design System Architecture
 
-### `vite.config.ts`
-- **Port**: 8080
-- **Plugins**: `@vitejs/plugin-react-swc`
-- **Alias**: `@` maps to `./src`
+### Theming System
+The site features dynamic theme syncing through `ThemeProvider.tsx`, manipulating core CSS variables within `index.css`:
+- **Vintage**: Warm cream base with classic Forest Green accents.
+- **Midnight**: Cyberpunk aesthetics mapping high-contrast teal and neon against heavily muted dark containers.
+- **Deep Sea**: Muted navy/purple background (Default active layout).
+- **Bubblegum**: High saturation pink and bright sky-blue accents.
 
-### `tailwind.config.ts`
-- **Dark Mode**: Class-based
-- **Theme Extension**:
-    - **Colors**: Custom Poolsuite-inspired palette (Cream, Forest Green, Sunset Orange).
-    - **Font**: `Instrument Serif` (Headings), `Inter` (Body), `Space Mono` (UI).
-    - **Shadows**: `retro`, `retro-sm`, `retro-lg` (Hard, non-blurred shadows).
-    - **Animations**: `marquee`, `fade-in-up`, `fade-in`, `slide-in`.
-- **Content Paths**: Scans `pages`, `components`, `app`, `src`
+### Layout Mechanics
+- **Bento Grid**: Instead of free-floating divs, the main interactions are strictly confined to structured `BentoCard` tiles operating on a responsive `md:grid-cols-3` scaling logic.
+- **Favicon Synchronization**: The active tab favicon dynamically renders an inline SVG mapped precisely to the active tailwind theme `--primary` HSL variables ensuring the UX persists outside the immediate DOM.
 
-### `package.json` Scripts
-- `dev`: Start Vite dev server
-- `build`: Run TypeScript compiler check (`tsc`) then Vite build
-- `preview`: Preview production build
-- `lint`: Run ESLint
+## 5. Architectural Shifts 
 
-## 5. Design System (Poolsuite Aesthetic)
+### Home Layout Refactor
+The `Home.tsx` file has evolved from an open desktop layout into a consolidated command dashboard format featuring:
+- High-level bio and profile linkage.
+- `Theme_Config.sys`: Replaced the legacy stateless global click-counter to inject our context-aware React themes.
+- Real-time `Terminal_Log` mimicking live github actions.
+- Notebook IDE placeholders indicating pipeline scaling.
 
-### Color Palette
-- **Background**: Warm Cream (`#f4f1ea` / `hsl(40 30% 94%)`)
-- **Primary**: Forest Green (`#2d5a27` / `hsl(113 40% 25%)`)
-- **Secondary**: Sunset Orange (`#ff6b4a` / `hsl(11 100% 65%)`)
-- **Accent**: Retro Blue (`#4a90e2` / `hsl(212 72% 59%)`)
-- **Text**: Almost Black (`#1a1a1a` / `hsl(0 0% 10%)`)
+### Content Migration
+- **Skills Redesign**: Shifted focus away from generic frontend web frameworks to spotlight low-level networking, Kubernetes, CUDA processing arrays, and Python-focused ML ops structure.
+- **Background Integrity**: Refactored static backgrounds (`bg-[#fdfbf7]`, `bg-white`) into dynamic tailwind states (`bg-card`, `bg-background`) globally enabling seamless switching across light and dark palettes without text blending or shadow disappearance. 
 
-### Typography
-- **Headings**: `Instrument Serif` (often italicized for elegance).
-- **Body**: `Inter` (clean readability).
-- **UI/Code**: `Space Mono` (retro computing feel).
-
-### Visual Elements
-- **Windows**: Content contained in bordered boxes with "title bars".
-- **Shadows**: Hard, directional shadows (`4px 4px 0px black`) simulating early GUI depth.
-- **Grain**: Subtle noise overlay (`.grain-overlay`) for texture.
-- **Marquee**: Scrolling text footer for announcements.
-
-## 6. Routing & Navigation
-
-### Routes (`src/App.tsx`)
-| Path | Component | Description |
-|------|-----------|-------------|
-| `/` | `Home` | Desktop-style landing page with "Welcome.sys" window |
-| `/about` | `About` | "UserProfile.dat" window with bio and resume |
-| `/projects` | `Projects` | Grid of "Application Windows" showcasing work |
-| `/skills` | `Skills` | Categorized "Folders" of technical skills |
-| `/contact` | `Contact` | "Comms_Link.exe" window for contact info |
-| `*` | `NotFound` | 404 Catch-all route |
-
-### Navigation (`src/components/Navigation.tsx`)
-- **Desktop**: Fixed top "Menu Bar" (File, Edit, View style) with clock.
-- **Mobile**: Hamburger menu opening a dropdown list.
-- **Style**: Retro OS menu bar, borders, and hover effects.
-
-## 7. Components Detail
-
-### `ProjectCard.tsx`
-- **Style**: "Application Window" with title bar controls (minimize, maximize, close).
-- **Content**: Image with dither effect simulation, title, description, and tech stack.
-- **Actions**: "Run" (Live Preview) and "Source" (GitHub) buttons.
-
-### `SEO.tsx`
-- Wraps `react-helmet-async`.
-- **Props**: `title`, `description`, `keywords`, `ogImage`, `ogUrl`.
-- **Function**: Sets `<title>`, `<meta>` tags for SEO and Open Graph sharing.
-
-### `SkillBadge.tsx`
-- **Style**: Retro tag/pill with hard border and hover offset animation.
-- **Animation**: Staggered fade-in entrance.
-
-### `ui/button.tsx`
-- **Style**: Sharp corners (`rounded-none`), hard borders, and retro shadows.
-- **Variants**: Default (Primary), Outline (White), Ghost (Transparent).
-
-## 8. Pages Detail
-
-### `Home.tsx`
-- **Layout**: "Desktop" environment.
-- **Hero**: Central "Welcome" window.
-- **Footer**: Scrolling marquee text.
-- **Background**: Dot grid pattern with grain overlay.
-
-### `About.tsx`
-- **Layout**: "User Profile" window.
-- **Content**: Bio, Resume download, and Services list.
-- **Visuals**: "Avatar" placeholder with retro styling.
-
-### `Projects.tsx`
-- **Layout**: Grid of `ProjectCard` components.
-- **Header**: "Selected Works" with retro typography.
-
-### `Skills.tsx`
-- **Layout**: Stack of "Folder" containers for different skill categories.
-- **Content**: `SkillBadge` grid within each category.
-
-### `Contact.tsx`
-- **Layout**: "Communications" window.
-- **Content**: Contact info cards (Phone, Email, Location) and Social Links grid.
-
-## 9. Utilities
-
-### `src/lib/utils.ts`
-- `cn(...inputs)`: Merges Tailwind classes using `clsx` and `tailwind-merge`.
-
-### `src/lib/placeholderImages.ts`
-- Exports `placeholderImages` object containing Base64 SVG strings.
-- **Update**: Colors updated to match the new Cream/Green/Orange palette.
+All future AI modifications must adhere strictly to preserving the bento grid stability and CSS variable integrations specified within `index.css` and `tailwind.config.ts`.
