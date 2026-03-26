@@ -14,6 +14,10 @@ const Home = () => {
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
 
+  const [isHoveringTom, setIsHoveringTom] = useState(false);
+  const [isEasterEggActive, setIsEasterEggActive] = useState(false);
+  const [isRetreating, setIsRetreating] = useState(false);
+
   useEffect(() => {
     let currentIndex = 0;
     const typingInterval = setInterval(() => {
@@ -68,7 +72,45 @@ const Home = () => {
         >
           <div className="p-8 sm:p-10 flex flex-col justify-center h-full">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 italic text-foreground leading-tight">
-              Hey! I'm Roshan Tom <br className="hidden sm:block" />
+              Hey! I'm Roshan{' '}
+              <span 
+                className="relative inline-block cursor-help z-10"
+                onMouseEnter={() => setIsHoveringTom(true)}
+                onMouseLeave={() => setIsHoveringTom(false)}
+                onClick={() => {
+                  if (isEasterEggActive || isRetreating) return;
+                  setIsEasterEggActive(true);
+                  setTimeout(() => {
+                    setIsRetreating(true);
+                    setTimeout(() => {
+                      setIsEasterEggActive(false);
+                      setIsRetreating(false);
+                      setIsHoveringTom(false);
+                    }, 500);
+                  }, 1500);
+                }}
+              >
+                {/* Tom Cat Image */}
+                <img 
+                  src="/images/tom.png" 
+                  alt="" 
+                  className={`absolute left-[20%] bottom-0 w-auto h-16 md:h-20 max-w-none object-contain transition-all duration-500 z-0 select-none pointer-events-none drop-shadow-2xl origin-bottom
+                    ${(isHoveringTom || isEasterEggActive) && !isRetreating ? '-translate-y-[90%] -translate-x-1/2 opacity-100 -rotate-12 scale-100' : 'translate-y-0 -translate-x-1/2 opacity-0 rotate-0 scale-50'}
+                  `}
+                />
+                
+                {/* Jerry Mouse Image */}
+                <img 
+                  src="/images/jerry.png" 
+                  alt="" 
+                  className={`absolute left-[80%] bottom-0 w-auto h-16 md:h-20 max-w-none object-contain transition-all duration-500 z-0 select-none pointer-events-none drop-shadow-2xl origin-bottom
+                    ${isEasterEggActive && !isRetreating ? '-translate-y-[85%] -translate-x-1/3 opacity-100 rotate-12 scale-100' : 'translate-y-0 -translate-x-1/2 opacity-0 rotate-0 scale-50 delay-100'}
+                  `}
+                />
+
+                <span className="relative z-20 px-1 transition-colors hover:text-pool-orange">Tom</span>
+              </span>{' '}
+              <br className="hidden sm:block" />
               <span className="text-primary not-italic block sm:inline mt-2 sm:mt-0">Robinson</span>
             </h1>
             <p className="text-lg sm:text-xl font-mono text-muted-foreground mb-8 max-w-2xl leading-relaxed">
