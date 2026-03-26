@@ -31,7 +31,6 @@ dist-ssr
 .env.production.local
 
 # Documentation
-GEMINI.md
 
 # Vercel and local caching
 .vercel

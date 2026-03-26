@@ -1,5 +1,7 @@
 # Roshan Tom Robinson - Portfolio Website
 
+> **Development Note**: I built the baseline architecture, core logic, and the vast majority of this website by hand. Advanced AI assistants (Google Gemini) were used collaboratively strictly to maximize efficiency, accelerate styling iterations for the bento-grid, and assist with rapid debugging.
+
 ## 1. Project Overview
 **Name**: `roshan-portfolio`
 **Description**: A professional developer portfolio with a distinctive "Internet Summer" / Retro Macintosh aesthetic inspired by Poolsuite. It combines nostalgic design elements (window-style containers, pixel fonts, grain overlays) with modern web technologies to showcase projects and skills.
