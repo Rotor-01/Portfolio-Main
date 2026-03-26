@@ -1,6 +1,12 @@
-import { Phone, MapPin, Mail, Github, Linkedin, Twitter, Send } from 'lucide-react';
+import { Phone, MapPin, Mail, Github, Linkedin, Instagram, Send } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { useToast } from '@/hooks/use-toast';
+
+const XLogo = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+);
 
 const Contact = () => {
   const { toast } = useToast();
@@ -99,10 +105,10 @@ const Contact = () => {
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { icon: Github, label: 'GitHub', href: 'https://github.com/RoshanTomRobin' },
+                    { icon: Github, label: 'GitHub', href: 'https://github.com/Rotor-01' },
                     { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/roshan-tom-robinson-31b47b295' },
-                    { icon: Mail, label: 'Gmail', href: 'mailto:roshantomrobinson@gmail.com' },
-                    { icon: Twitter, label: 'Twitter', href: 'https://twitter.com' },
+                    { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/roshan.tom.robinson' },
+                    { icon: XLogo, label: 'X', href: 'https://x.com' },
                   ].map((social) => (
                     <a
                       key={social.label}

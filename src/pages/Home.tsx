@@ -1,24 +1,18 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, Linkedin, Mail, FileText, Terminal, Palette, Clock, GitCommit, Check } from 'lucide-react';
+import { ArrowRight, Github, Mail, FileText, Terminal, Palette, GitCommit, Check, Instagram } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { useEffect, useState } from 'react';
 import BentoCard from '@/components/BentoCard';
 import ProjectCard from '@/components/ProjectCard';
 import { useTheme, Theme } from '@/components/ThemeProvider';
+import { useToast } from '@/hooks/use-toast';
 
 const Home = () => {
   const [typedText, setTypedText] = useState('');
   const fullText = 'Building_AI_infrastructure...';
   const { theme, setTheme } = useTheme();
-
-  const [timeElapsed, setTimeElapsed] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('portfolio_time_elapsed');
-      if (saved) return parseInt(saved, 10);
-    }
-    return 0;
-  });
+  const { toast } = useToast();
 
   useEffect(() => {
     let currentIndex = 0;
@@ -31,27 +25,10 @@ const Home = () => {
       }
     }, 100);
 
-    const timeInterval = setInterval(() => {
-      setTimeElapsed(prev => prev + 1);
-    }, 1000);
-
     return () => {
       clearInterval(typingInterval);
-      clearInterval(timeInterval);
     };
   }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolio_time_elapsed', timeElapsed.toString());
-    }
-  }, [timeElapsed]);
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-    const s = (seconds % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  };
 
   const featuredProjects = [
     {
@@ -107,23 +84,38 @@ const Home = () => {
               <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 border border-black rounded-none shadow-retro hover:translate-y-0.5 hover:shadow-none transition-all">
                 <Link to="/about">More about me <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <div className="flex gap-2 ml-auto sm:ml-4">
-                {[
-                  { icon: Github, href: "https://github.com/RoshanTomRobin", label: "GitHub" },
-                  { icon: Linkedin, href: "https://www.linkedin.com/in/roshan-tom-robinson-31b47b295", label: "LinkedIn" },
-                  { icon: Mail, href: "mailto:roshantomrobinson@gmail.com", label: "Email" }
-                ].map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 border border-black/20 hover:border-black hover:bg-pool-cream transition-all group bg-card"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </a>
-                ))}
+              <div className="flex flex-wrap gap-2 ml-auto sm:ml-4">
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText('roshantomrobinson@gmail.com');
+                    toast({ title: 'Copied!', description: 'roshantomrobinson@gmail.com' });
+                  }}
+                  className="flex items-center gap-2 px-3 py-1.5 border border-black/20 hover:border-black hover:bg-pool-cream transition-all text-xs font-mono bg-card"
+                >
+                  <Mail className="w-3.5 h-3.5 text-pool-orange shrink-0" />
+                  <span className="truncate hidden sm:inline">roshantomrobinson [at] gmail [dot] com</span>
+                </button>
+                
+                <a 
+                  href="https://instagram.com/roshan.tom.robinson" 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 border border-black/20 hover:border-black hover:bg-pool-cream transition-all text-xs font-mono bg-card"
+                >
+                  <Instagram className="w-3.5 h-3.5 text-[#E1306C] shrink-0" />
+                  <span className="truncate hidden sm:inline">Instagram</span>
+                </a>
+
+                <a
+                  href="https://github.com/Rotor-01"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 border border-black/20 hover:border-black hover:bg-pool-cream transition-all text-xs font-mono bg-card"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                  <span className="truncate hidden sm:inline">GitHub</span>
+                </a>
               </div>
             </div>
           </div>
@@ -255,32 +247,6 @@ const Home = () => {
            </div>
         </BentoCard>
 
-      </div>
-
-      {/* InfoShower Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-primary text-primary-foreground border-t border-black py-2 px-4 lg:px-8 z-20 flex flex-wrap items-center justify-between font-mono text-xs uppercase tracking-widest">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2" title="Session Time Elapsed">
-            <Clock className="w-4 h-4 text-pool-orange" />
-            <span>SESSION: {formatTime(timeElapsed)}</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-2" title="Latest Commit">
-            <GitCommit className="w-4 h-4 text-pool-orange" />
-            <a href="https://github.com/Rotor-01/Portfolio-Main" target="_blank" rel="noreferrer" className="hover:text-pool-cream hover:underline transition-all">
-              b5f95e5
-            </a>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2" title="Current Active Theme">
-            <Palette className="w-4 h-4 text-pool-orange" />
-            <span>THEME: {theme.replace('theme-', '').toUpperCase()}</span>
-          </div>
-          <div className="hidden md:flex items-center gap-2">
-            <span className="text-pool-orange animate-pulse">●</span> SYSTEM ONLINE
-          </div>
-        </div>
       </div>
     </main>
   );
