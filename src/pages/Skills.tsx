@@ -5,16 +5,20 @@ import { Folder } from 'lucide-react';
 const Skills = () => {
   const skillCategories = [
     {
-      name: "Frontend Core",
-      skills: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript']
+      name: "Core Programming",
+      skills: ['Python', 'C / C++', 'CUDA', 'Bash', 'Go']
     },
     {
-      name: "Frameworks & Libs",
-      skills: ['React', 'Next.js', 'Tailwind CSS', 'Redux']
+      name: "Hardware & Architecture",
+      skills: ['Enterprise Architecture', 'Hardware Interconnects', 'FPGA / ASIC']
     },
     {
-      name: "Backend & Tools",
-      skills: ['Python', 'Node.js', 'Git', 'Vite', 'Lua']
+      name: "Networking & Infra",
+      skills: ['RDMA & InfiniBand', 'SDN', 'Linux Admin', 'TCP/IP']
+    },
+    {
+      name: "MLOps & Deployment",
+      skills: ['Docker', 'Kubernetes', 'Server Clusters']
     }
   ];
 
@@ -30,7 +34,7 @@ const Skills = () => {
           </h1>
           <div className="w-24 h-1 bg-primary mx-auto mb-6" />
           <p className="text-lg font-mono text-muted-foreground max-w-2xl mx-auto">
-            // Tools and technologies I use to build digital products.
+            // Core capabilities in Computer Engineering, AI Hardware, and Infrastructure.
           </p>
         </div>
 
@@ -62,9 +66,9 @@ const Skills = () => {
         </div>
 
         <div className="mt-16 bg-primary text-primary-foreground border border-black shadow-retro p-8 text-center animate-fade-in-up">
-          <h2 className="font-serif text-2xl font-bold mb-4 italic">Always Evolving</h2>
+          <h2 className="font-serif text-2xl font-bold mb-4 italic">Transitioning to AI Hardware & Networking</h2>
           <p className="font-sans text-lg opacity-90 max-w-2xl mx-auto">
-            Currently exploring advanced performance optimization techniques and WebGL interactions.
+            I am focusing on Computer Engineering—managing multi-GPU topologies, high-speed interconnects, and orchestrating enterprise AI infrastructure.
           </p>
         </div>
       </div>

@@ -46,7 +46,7 @@ const Navigation = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`px-4 py-1.5 font-mono text-sm uppercase tracking-wider border border-transparent hover:border-black hover:bg-pool-cream hover:text-black transition-all ${location.pathname === link.path ? 'bg-black text-white border-black' : 'text-foreground'
+              className={`px-4 py-1.5 font-mono text-sm uppercase tracking-wider border border-transparent hover:border-black hover:bg-pool-cream hover:text-foreground transition-all ${location.pathname === link.path ? 'bg-primary text-primary-foreground border-black' : 'text-foreground'
                 }`}
             >
               {link.label}
@@ -80,7 +80,7 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-3 font-mono text-lg uppercase border border-transparent hover:border-black hover:bg-pool-cream hover:text-black transition-all ${location.pathname === link.path ? 'bg-primary text-primary-foreground border-black' : ''
+                className={`px-4 py-3 font-mono text-lg uppercase border border-transparent hover:border-black hover:bg-pool-cream hover:text-foreground transition-all ${location.pathname === link.path ? 'bg-primary text-primary-foreground border-black' : ''
                   }`}
               >
                 {link.label}

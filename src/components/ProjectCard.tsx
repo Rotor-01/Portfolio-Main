@@ -34,7 +34,7 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
       </div>
 
       {/* Window Content */}
-      <div className="p-4 flex flex-col flex-grow bg-white">
+      <div className="p-4 flex flex-col flex-grow bg-card">
         {/* Image Container */}
         <div className="relative mb-4 border border-black overflow-hidden bg-pool-cream group-hover:border-primary transition-colors">
           <div className="absolute inset-0 bg-black/5 pointer-events-none z-10" /> {/* Dither/Grain simulation */}
@@ -60,7 +60,7 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
 
           {/* Tag Overlay */}
           <div className="absolute top-2 right-2 z-20">
-            <Badge variant="secondary" className="bg-white border border-black text-black rounded-none shadow-retro-sm font-mono text-[10px] uppercase">
+            <Badge variant="secondary" className="bg-card border border-black text-foreground rounded-none shadow-retro-sm font-mono text-[10px] uppercase">
               {tag}
             </Badge>
           </div>
@@ -97,7 +97,7 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
             </Button>
           )}
           {githubUrl && (
-            <Button asChild size="sm" variant="outline" className="flex-1 bg-white hover:bg-pool-cream border border-black rounded-none shadow-retro-sm hover:translate-y-0.5 hover:shadow-none transition-all">
+            <Button asChild size="sm" variant="outline" className="flex-1 bg-card hover:bg-pool-cream border border-black rounded-none shadow-retro-sm hover:translate-y-0.5 hover:shadow-none transition-all">
               <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="gap-2">
                 <ExternalLink className="h-4 w-4" />
                 <span className="font-mono uppercase text-xs">Source</span>

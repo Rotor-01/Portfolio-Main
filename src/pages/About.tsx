@@ -40,18 +40,18 @@ const About = () => {
                 <div className="space-y-4 font-sans text-lg leading-relaxed text-muted-foreground">
                   <p>
                     Hello! I'm <span className="font-bold text-primary">Roshan Tom Robinson</span>,
-                    a full stack software developer with a passion for retro aesthetics and modern performance.
+                    a Computer Engineering enthusiast transitioning into AI hardware, networking, and infrastructure.
                   </p>
                   <p>
-                    I specialize in building accessible, pixel-perfect web applications using
-                    <span className="font-mono text-sm bg-pool-cream px-1 mx-1 border border-black/20">React</span>
+                    I am focusing on building the backbone for AI systems using
+                    <span className="font-mono text-sm bg-pool-cream px-1 mx-1 border border-black/20">C/C++</span>
                     and
-                    <span className="font-mono text-sm bg-pool-cream px-1 mx-1 border border-black/20">TypeScript</span>.
-                    My goal is to bridge the gap between nostalgic design languages and contemporary user experiences.
+                    <span className="font-mono text-sm bg-pool-cream px-1 mx-1 border border-black/20">Python</span>.
+                    My goal is to master high-performance networking, hardware interconnects, and managing enterprise-level server clusters.
                   </p>
                   <p>
-                    When I'm not coding, I'm likely exploring old operating systems, listening to synthwave,
-                    or optimizing my development workflow.
+                    When I'm not coding, I'm likely exploring server topologies, delving into Linux kernel tuning,
+                    or expanding my understanding of parallel computing.
                   </p>
                 </div>
 
@@ -70,10 +70,10 @@ const About = () => {
               <h3 className="font-mono text-xl font-bold uppercase mb-6">Core Services</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
-                  'Responsive Web Design',
-                  'UI/UX Implementation',
-                  'Frontend Architecture',
-                  'Performance Optimization',
+                  'AI Hardware Configuration',
+                  'High-Performance Networking',
+                  'Cluster Orchestration (MLOps)',
+                  'Linux System Administration',
                 ].map((item) => (
                   <div
                     key={item}

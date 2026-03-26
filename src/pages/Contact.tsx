@@ -33,7 +33,7 @@ const Contact = () => {
             <div className="grid md:grid-cols-2 gap-8">
               {/* Contact Info Cards */}
               <div className="space-y-6">
-                <div className="bg-white border border-black p-6 hover:shadow-retro transition-all group">
+                <div className="bg-card border border-black p-6 hover:shadow-retro transition-all group">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-pool-cream border border-black group-hover:bg-primary group-hover:text-white transition-colors">
                       <Phone className="h-5 w-5" />
@@ -47,7 +47,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="bg-white border border-black p-6 hover:shadow-retro transition-all group">
+                <div className="bg-card border border-black p-6 hover:shadow-retro transition-all group">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-pool-cream border border-black group-hover:bg-primary group-hover:text-white transition-colors">
                       <Mail className="h-5 w-5" />
@@ -61,7 +61,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="bg-white border border-black p-6 hover:shadow-retro transition-all group">
+                <div className="bg-card border border-black p-6 hover:shadow-retro transition-all group">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-pool-cream border border-black group-hover:bg-primary group-hover:text-white transition-colors">
                       <MapPin className="h-5 w-5" />
@@ -77,7 +77,7 @@ const Contact = () => {
               </div>
 
               {/* Social Links Grid */}
-              <div className="bg-pool-cream border border-black p-8 flex flex-col justify-center">
+              <div className="bg-card border border-black p-8 flex flex-col justify-center">
                 <h3 className="font-serif text-2xl font-bold italic mb-6 text-center">
                   Social Channels
                 </h3>
@@ -93,7 +93,7 @@ const Contact = () => {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex flex-col items-center justify-center p-4 bg-white border border-black hover:shadow-retro hover:-translate-y-1 transition-all"
+                      className="flex flex-col items-center justify-center p-4 bg-card border border-black hover:shadow-retro hover:-translate-y-1 transition-all"
                     >
                       <social.icon className="h-6 w-6 mb-2" />
                       <span className="font-mono text-xs uppercase">{social.label}</span>

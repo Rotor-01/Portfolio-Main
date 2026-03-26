@@ -54,11 +54,11 @@ export default {
         },
         // Poolsuite specific palette extensions
         pool: {
-          cream: "#f4f1ea",
-          green: "#2d5a27",
-          orange: "#ff6b4a",
-          blue: "#4a90e2",
-          pink: "#ff9e9e",
+          cream: "hsl(var(--pool-cream))",
+          green: "hsl(var(--pool-green))",
+          orange: "hsl(var(--pool-orange))",
+          blue: "hsl(var(--pool-blue))",
+          pink: "hsl(var(--pool-pink))",
         }
       },
       borderRadius: {

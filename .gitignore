@@ -36,3 +36,7 @@ GEMINI.md
 # Vercel and local caching
 .vercel
 .eslintcache
+
+# AI and Agent Workflows
+.agent/
+.gemini/

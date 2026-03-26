@@ -9,15 +9,13 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = 'Roshan Tom Robinson | Full Stack Software Developer',
-  description = 'Full Stack Software Developer specializing in React, TypeScript, and modern web technologies. View my portfolio, projects, and skills.',
+  title = 'Roshan Tom Robinson',
+  description = 'Computer Engineering enthusiast focusing on AI hardware and networking. View my portfolio, projects, and skills.',
   keywords = 'front-end developer, software developer, react, typescript, web development, portfolio',
   ogImage = '/images/og-image.jpg',
   ogUrl = 'https://roshan-portfolio.vercel.app',
 }: SEOProps) => {
-  const siteTitle = title.includes('Roshan Tom Robinson')
-    ? title
-    : `${title} | Roshan Tom Robinson`;
+  const siteTitle = title;
 
   return (
     <Helmet>

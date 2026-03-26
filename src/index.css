@@ -7,8 +7,14 @@
 @layer base {
   :root {
     /* Poolsuite-inspired Palette */
+    --pool-cream: 40 30% 94%;
+    --pool-green: 113 40% 25%;
+    --pool-orange: 11 100% 65%;
+    --pool-blue: 212 72% 59%;
+    --pool-pink: 340 82% 52%;
+
     /* Background: Warm Cream #f4f1ea */
-    --background: 40 30% 94%;
+    --background: var(--pool-cream);
     /* Foreground: Almost Black #1a1a1a */
     --foreground: 0 0% 10%;
 
@@ -21,11 +27,11 @@
     --popover-foreground: 0 0% 10%;
 
     /* Primary: Forest Green #2d5a27 */
-    --primary: 113 40% 25%;
-    --primary-foreground: 40 30% 94%;
+    --primary: var(--pool-green);
+    --primary-foreground: var(--pool-cream);
 
     /* Secondary: Sunset Orange #ff6b4a */
-    --secondary: 11 100% 65%;
+    --secondary: var(--pool-orange);
     --secondary-foreground: 0 0% 10%;
 
     /* Muted: Light Grey #e0ded5 */
@@ -50,20 +56,65 @@
 
   .dark {
     /* Dark mode could be a "Night Mode" - Deep Navy/Purple */
-    --background: 240 20% 10%;
+    --pool-cream: 240 20% 10%;
+    --pool-green: 113 40% 45%;
+    --pool-orange: 11 100% 65%;
+    --pool-blue: 212 72% 59%;
+    --pool-pink: 340 82% 52%;
+    --background: var(--pool-cream);
     --foreground: 40 30% 94%;
     --card: 240 20% 15%;
     --card-foreground: 40 30% 94%;
-    --primary: 113 40% 45%;
+    --primary: var(--pool-green);
     --primary-foreground: 0 0% 100%;
-    --secondary: 11 100% 65%;
+    --secondary: var(--pool-orange);
     --secondary-foreground: 0 0% 100%;
     --muted: 240 10% 20%;
     --muted-foreground: 240 5% 65%;
-    --accent: 212 72% 59%;
+    --accent: var(--pool-blue);
     --accent-foreground: 0 0% 100%;
     --border: 40 30% 94%;
     --input: 40 30% 94%;
+  }
+
+  /* Themes */
+  .theme-vintage {
+    /* Standard Internet Summer */
+  }
+
+  .theme-midnight {
+    /* Cyberpunk / High Contrast Dark */
+    --pool-cream: 240 20% 7%;
+    --pool-green: 160 100% 50%; /* Neon Teal */
+    --pool-orange: 320 100% 55%; /* Neon Pink */
+    --pool-blue: 212 100% 60%;
+    --background: var(--pool-cream);
+    --foreground: 0 0% 95%;
+    --card: 240 20% 10%;
+    --card-foreground: 0 0% 95%;
+    --primary: var(--pool-green);
+    --primary-foreground: 240 20% 7%;
+    --secondary: var(--pool-orange);
+    --border: 0 0% 30%;
+    --muted: 240 20% 15%;
+    --muted-foreground: 240 10% 65%;
+  }
+
+  .theme-bubblegum {
+    /* Light aesthetics - Pinkish */
+    --pool-cream: 340 40% 96%;
+    --pool-green: 340 80% 60%;
+    --pool-orange: 190 70% 55%; /* Sky blue accent */
+    --background: var(--pool-cream);
+    --foreground: 340 60% 15%;
+    --card: 340 30% 98%;
+    --card-foreground: 340 60% 15%;
+    --primary: var(--pool-green);
+    --primary-foreground: 0 0% 100%;
+    --secondary: var(--pool-orange);
+    --border: 340 60% 15%;
+    --muted: 340 20% 90%;
+    --muted-foreground: 340 15% 45%;
   }
 }
 
