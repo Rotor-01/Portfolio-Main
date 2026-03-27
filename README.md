@@ -10,7 +10,7 @@ Roshan's Portfolio is my personal digital playground and the latest iteration of
 
 This portfolio draws heavy design inspiration from the retro-summer aesthetic of [Poolsuite](https://poolsuite.net/) and the bento-box dashboard layout of [Jason Cameron's Portfolio](https://jasoncameron.dev/). 
 
-*Note: This version of the portfolio was built collaboratively alongside advanced AI coding assistants to rapidly wireframe the styling, debug the bento-grid layouts, and push out a pixel-perfect execution of the design vision!*
+*Note: This version of the portfolio was built collaboratively alongside AI coding assistants to nail the styling, debug the bento-grid layouts, and push out a pixel-perfect execution of the design vision.*
 
 ---
 

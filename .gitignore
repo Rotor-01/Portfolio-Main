@@ -36,6 +36,8 @@ dist-ssr
 .vercel
 .eslintcache
 
-# AI and Agent Workflows
+# AI and Agent Workflows, Ease of coding
 .agent/
 .gemini/
+GEMINI.md
+gemini.md
