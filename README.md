@@ -2,7 +2,7 @@
 
 Roshan's Portfolio is my personal digital playground and the latest iteration of my developer portfolio, designed to showcase my projects, experiments, and journey in Computer Engineering, AI hardware, and networking.
 
-![Portfolio Preview](./public/images/projects/portfolio.jpg)
+![Portfolio Preview](./public/images/projects/portfolio.png)
 
 ![React](https://img.shields.io/badge/React-18-blue.svg) ![Vite](https://img.shields.io/badge/Vite-5-purple.svg) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-teal.svg)
 
