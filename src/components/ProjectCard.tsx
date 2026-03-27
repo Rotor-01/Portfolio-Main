@@ -41,7 +41,7 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
           {imageUrl ? (
             <div className="aspect-video relative">
               <img
-                src={"public/images/projects/meme.jpg"}
+                src={"./public/images/projects/meme.jpg"}
                 alt={`${title} preview`}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 onError={(e) => {
