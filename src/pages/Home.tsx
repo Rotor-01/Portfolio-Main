@@ -1,16 +1,17 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, Mail, FileText, Terminal, Palette, GitCommit, Check, Instagram } from 'lucide-react';
+import { ArrowRight, Github, Mail, FileText, Terminal, Palette, Check, Instagram } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { useEffect, useState } from 'react';
 import BentoCard from '@/components/BentoCard';
 import ProjectCard from '@/components/ProjectCard';
+import { projects } from '@/lib/projects';
 import { useTheme, Theme } from '@/components/ThemeProvider';
 import { useToast } from '@/hooks/use-toast';
 
 const Home = () => {
   const [typedText, setTypedText] = useState('');
-  const fullText = 'Building_AI_infrastructure...';
+  const fullText = 'Focus: embedded systems';
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
 
@@ -34,16 +35,7 @@ const Home = () => {
     };
   }, []);
 
-  const featuredProjects = [
-    {
-      title: 'Meme Memorial',
-      description: 'A digital memorial for beloved internet memes. Browse through internet history and pay respects to the classics.',
-      technologies: ['React', 'Next.js', 'Tailwind'],
-      tag: 'Closed Source / Inactive',
-      liveUrl: 'https://meme-memorial.vercel.app',
-      imageUrl: '/images/projects/cubes.png',
-    }
-  ];
+  const featuredProjects = projects.slice(0, 2);
 
   const availableThemes: { id: Theme; name: string; color: string }[] = [
     { id: 'theme-vintage', name: 'Vintage', color: 'bg-[#f4f1ea]' },
@@ -66,13 +58,13 @@ const Home = () => {
         
         {/* Section 1: Hero / Bio (Spans 3 cols on large) */}
         <BentoCard 
-          title="Welcome.sys" 
+          title="Profile.sys"
           icon={<Terminal className="w-4 h-4" />} 
           className="md:col-span-2 lg:col-span-3 min-h-[300px]"
         >
           <div className="p-8 sm:p-10 flex flex-col justify-center h-full">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 italic text-foreground leading-tight">
-              Hey! I'm Roshan{' '}
+              I’m Roshan{' '}
               <span className="whitespace-nowrap sm:whitespace-normal">
                 <span 
                   className="relative inline-block cursor-help z-10"
@@ -117,8 +109,8 @@ const Home = () => {
               </span>
             </h1>
             <p className="text-lg sm:text-xl font-mono text-muted-foreground mb-8 max-w-2xl leading-relaxed">
-              I'm transitioning into Computer Engineering with a focus on AI hardware and networking. 
-              Scaling infrastructure and maintaining ML systems is what keeps me building.
+              I plan to study computer engineering, with a focus on embedded systems, data centers, and networking.
+              I want to follow a sensor reading all the way from a pin on a chip to a server across the network.
             </p>
             
             <div className="h-6 mb-8 font-mono text-sm text-primary flex items-center">
@@ -127,13 +119,13 @@ const Home = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 sm:items-center pt-6 border-t border-black/10 w-full">
               <Button asChild size="sm" className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 border border-black rounded-none shadow-retro hover:translate-y-0.5 hover:shadow-none transition-all">
-                <Link to="/about">More about me <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/about">Why engineering? <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
               <div className="flex flex-wrap gap-2 sm:ml-auto w-full sm:w-auto justify-center sm:justify-end">
                 <button 
                   onClick={() => {
                     navigator.clipboard.writeText('roshantomrobinson@gmail.com');
-                    toast({ title: 'Copied!', description: 'roshantomrobinson@gmail.com' });
+                    toast({ title: 'Email address copied', description: 'roshantomrobinson@gmail.com' });
                   }}
                   className="flex items-center gap-2 px-3 py-1.5 border border-black/20 hover:border-black hover:bg-pool-cream transition-all text-xs font-mono bg-card"
                 >
@@ -177,50 +169,51 @@ const Home = () => {
             <div className="w-16 h-16 rounded-full border border-black flex items-center justify-center bg-pool-orange/10 mb-2 group hover:bg-pool-orange/20 transition-all">
               <Mail className="w-8 h-8 text-pool-orange group-hover:scale-110 transition-transform" />
             </div>
-            <h3 className="font-serif text-2xl font-bold italic">Let's Connect</h3>
-            <p className="text-sm text-muted-foreground font-mono">Always open to interesting projects and conversations.</p>
+            <h3 className="font-serif text-2xl font-bold italic">Compare notes</h3>
+            <p className="text-sm text-muted-foreground font-mono">Working with a dev board or setting up a home lab? I’d love to hear what you’re trying.</p>
             <Button asChild size="sm" variant="outline" className="w-full mt-auto bg-card hover:bg-pool-cream border border-black rounded-none shadow-retro hover:translate-y-0.5 hover:shadow-none transition-all text-foreground">
-              <Link to="/contact">Book a Chat</Link>
+              <Link to="/contact">Get in touch</Link>
             </Button>
           </div>
         </BentoCard>
 
         {/* Section 2: Featured Projects Title Header */}
         <div className="md:col-span-3 lg:col-span-4 mt-8 flex justify-between items-end border-b border-black/20 pb-2">
-           <h2 className="text-3xl font-serif font-bold italic">Featured Projects</h2>
+           <h2 className="text-3xl font-serif font-bold italic">From my project archive</h2>
            <Link to="/projects" className="font-mono text-sm text-pool-orange hover:text-black hover:underline transition-all">View all projects</Link>
         </div>
 
         {/* Featured Projects Content */}
         {featuredProjects.map((project, idx) => (
-          <div key={idx} className="md:col-span-3 lg:col-span-2 relative animate-fade-in-up" style={{ animationDelay: `${200 + (idx * 100)}ms` }}>
+          <div key={project.title} className="md:col-span-3 lg:col-span-2 relative animate-fade-in-up" style={{ animationDelay: `${200 + (idx * 100)}ms` }}>
             <ProjectCard {...project} />
           </div>
         ))}
 
         {/* Placeholder for 2nd project if it doesn't exist to balance grid layout */}
         {featuredProjects.length === 1 && (
-          <div className="md:col-span-3 lg:col-span-2 hidden lg:block opacity-60">
-             <BentoCard title="Empty_Slot.sys" icon={<Terminal className="w-4 h-4"/>} className="h-full border-dashed" delay={300}>
-                <div className="flex flex-col items-center justify-center h-full min-h-[300px] font-mono text-muted-foreground text-sm uppercase">
-                   <div className="w-8 h-8 border border-muted-foreground/50 rounded-full animate-ping mb-4"></div>
-                   <p>Awaiting_Deployment</p>
-                </div>
+          <div className="md:col-span-3 lg:col-span-2 hidden lg:block">
+             <BentoCard title="Lab_plan.txt" icon={<Terminal className="w-4 h-4"/>} className="h-full border-dashed" delay={300}>
+               <div className="flex flex-col items-start justify-center h-full p-8 gap-4">
+                 <h3 className="font-serif text-2xl font-bold italic">A temperature logger</h3>
+                 <p className="text-sm text-muted-foreground">One build I’d like to try is a sensor that reports the temperature beside a server. I want to see how the readings change under load.</p>
+                 <Link to="/skills" className="font-mono text-sm underline">Explore my learning plan</Link>
+               </div>
              </BentoCard>
           </div>
         )}
 
         {/* Section 3: Dashboard Highlights Title Header */}
         <div className="md:col-span-3 lg:col-span-4 mt-8 flex justify-between items-end border-b border-black/20 pb-2">
-           <h2 className="text-3xl font-serif font-bold italic">Dashboard / Highlights</h2>
+           <h2 className="text-3xl font-serif font-bold italic">My workspace</h2>
         </div>
 
         {/* Theme Settings Highlight */}
         <BentoCard title="Theme_Config.sys" icon={<Palette className="w-4 h-4"/>} className="md:col-span-1 lg:col-span-2" delay={400}>
            <div className="p-6 h-full flex flex-col">
-             <h3 className="font-bold text-xl mb-3 font-serif italic text-primary">System Appearance</h3>
+             <h3 className="font-bold text-xl mb-3 font-serif italic text-primary">Display theme</h3>
              <p className="text-sm text-muted-foreground mb-6 font-mono leading-relaxed">
-               Select an environment theme. Accent colors and backgrounds will recalibrate accordingly.
+               Choose a color palette for this portfolio.
              </p>
              <div className="mt-auto grid grid-cols-2 gap-3">
                 {availableThemes.map((t) => (
@@ -238,35 +231,16 @@ const Home = () => {
            </div>
         </BentoCard>
 
-        {/* Recent Commits (Mock Terminal styling) */}
-        <BentoCard title="Terminal_Log" icon={<GitCommit className="w-4 h-4"/>} className="md:col-span-1 lg:col-span-1" delay={500}>
+        <BentoCard title="Study_notes.txt" icon={<Terminal className="w-4 h-4"/>} className="md:col-span-1 lg:col-span-1" delay={500}>
           <div className="p-5 flex flex-col h-full bg-[#1a1a1a] text-[#4a90e2] font-mono text-xs">
-            <h3 className="text-pool-cream mb-4 border-b border-white/20 pb-2 uppercase tracking-wider flex items-center justify-between">
-              <span>Recent Commits</span>
-              <span className="text-[10px] text-white/50">[[info]]</span>
-            </h3>
-            <ul className="space-y-3 flex-grow opacity-90 overflow-hidden">
-              <li className="flex gap-2">
-                <span className="text-pool-orange shrink-0">~</span>
-                <span className="truncate hover:text-white transition-colors cursor-pointer">feat(ui): add bento dashboard</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-pool-orange shrink-0">~</span>
-                <span className="truncate hover:text-white transition-colors cursor-pointer">refactor(home): migrate to grid</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-pool-orange shrink-0">~</span>
-                <span className="truncate hover:text-white transition-colors cursor-pointer">fix(counter): sync global state</span>
-              </li>
-              <li className="flex gap-2">
-                <span className="text-pool-orange shrink-0">~</span>
-                <span className="truncate hover:text-white transition-colors cursor-pointer">docs: update readme goals</span>
-              </li>
+            <h3 className="text-white mb-4 border-b border-white/20 pb-2 uppercase tracking-wider">Experiments to try</h3>
+            <ul className="space-y-3 flex-grow list-disc pl-4">
+              <li>Read a sensor over I²C.</li>
+              <li>Trace a DNS lookup in Wireshark.</li>
+              <li>Run a service in a Linux VM.</li>
             </ul>
             <div className="mt-4 pt-4 border-t border-white/10 flex justify-between">
-               <a href="https://github.com/Rotor-01/Portfolio-Main" target="_blank" rel="noreferrer" className="text-pool-orange hover:text-white hover:underline tracking-widest text-[10px] uppercase">
-                 [View on GitHub]
-               </a>
+               <Link to="/skills" className="text-pool-orange hover:text-white hover:underline tracking-widest text-[10px] uppercase">Skills to build</Link>
                <span className="animate-pulse w-2 h-4 bg-pool-orange inline-block"></span>
             </div>
           </div>
@@ -277,16 +251,16 @@ const Home = () => {
            <div className="p-6 font-mono text-xs text-foreground leading-relaxed h-full bg-card relative">
              {/* Note lines background pattern */}
              <div className="absolute inset-0 pointers-events-none opacity-5" style={{ backgroundImage: 'linear-gradient(transparent 95%, #000 100%)', backgroundSize: '100% 24px' }}></div>
-             <p className="text-muted-foreground italic mb-6 relative z-10">// Hardware & Software pipelined</p>
+             <p className="text-muted-foreground italic mb-6 relative z-10">Embedded project ideas</p>
              <div className="space-y-6 relative pl-4 z-10">
                 <div className="absolute left-0 top-1 bottom-1 w-px bg-pool-orange/30"></div>
                 <div className="group">
                   <h4 className="font-bold mb-1 group-hover:text-primary transition-colors text-sm">Smart Beyblade</h4>
-                  <p className="text-muted-foreground">RPM tracking, impact forces via Bluetooth.</p>
+                  <p className="text-muted-foreground">Could a spinning top measure its speed and send each hit to a phone over Bluetooth?</p>
                 </div>
                 <div className="group">
                   <h4 className="font-bold mb-1 group-hover:text-primary transition-colors text-sm">Y2K Car Radio</h4>
-                  <p className="text-muted-foreground">90s themed head unit with CarPlay integration over wireless.</p>
+                  <p className="text-muted-foreground">I’d like to pair a ’90s-style dashboard and physical controls with wireless CarPlay.</p>
                 </div>
              </div>
            </div>

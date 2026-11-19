@@ -12,7 +12,7 @@ const Contact = () => {
   const { toast } = useToast();
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream">
-      <SEO title="Contact" />
+      <SEO title="Contact" description="Get in touch with Roshan Tom Robinson to exchange embedded project ideas, home lab notes, or advice on studying computer engineering." />
       <div className="grain-overlay" />
 
       <div className="max-w-4xl mx-auto">
@@ -31,10 +31,10 @@ const Contact = () => {
           <div className="p-8 sm:p-12">
             <div className="text-center mb-12">
               <h1 className="text-4xl sm:text-5xl font-serif font-bold italic mb-4">
-                Get In Touch
+                Get in touch
               </h1>
               <p className="font-mono text-muted-foreground">
-                // Initiating communication protocols...
+                Have a favorite first board, a home lab project, or advice on studying computer engineering? I’d love to hear from you.
               </p>
             </div>
 
@@ -54,7 +54,7 @@ const Contact = () => {
                           toast({ title: 'Copied to clipboard', description: '+91 62823 71583' });
                         }}
                         className="text-sm hover:underline text-left transition-colors hover:text-pool-orange"
-                        title="Copy to clipboard"
+                        title="Copy phone number"
                       >
                         +91 62823 71583
                       </button>
@@ -75,7 +75,7 @@ const Contact = () => {
                           toast({ title: 'Copied to clipboard', description: 'roshantomrobinson@gmail.com' });
                         }}
                         className="text-sm hover:underline text-left transition-colors hover:text-pool-orange"
-                        title="Copy to clipboard"
+                        title="Copy email address"
                       >
                         roshantomrobinson [at] gmail [dot] com
                       </button>
@@ -101,7 +101,7 @@ const Contact = () => {
               {/* Social Links Grid */}
               <div className="bg-card border border-black p-8 flex flex-col justify-center">
                 <h3 className="font-serif text-2xl font-bold italic mb-6 text-center">
-                  Social Channels
+                  Find me online
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   {[

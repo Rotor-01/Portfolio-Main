@@ -41,7 +41,7 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
           {imageUrl ? (
             <div className="aspect-video relative">
               <img
-                src={"./public/images/projects/meme.jpg"}
+                src={imageUrl}
                 alt={`${title} preview`}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 onError={(e) => {
@@ -49,12 +49,12 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
                 }}
               />
               <div className="absolute inset-0 flex items-center justify-center bg-pool-cream/50 text-xs font-mono text-muted-foreground" style={{ display: imageUrl ? 'none' : 'flex' }}>
-                IMAGE_NOT_FOUND
+                Preview unavailable
               </div>
             </div>
           ) : (
             <div className="aspect-video flex items-center justify-center bg-pool-cream text-xs font-mono text-muted-foreground">
-              NO_PREVIEW_AVAILABLE
+              No project preview
             </div>
           )}
 
@@ -92,7 +92,7 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
             <Button asChild size="sm" className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 border border-black rounded-none shadow-retro-sm hover:translate-y-0.5 hover:shadow-none transition-all">
               <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="gap-2">
                 <Eye className="h-4 w-4" />
-                <span className="font-mono uppercase text-xs">Run</span>
+                <span className="font-mono uppercase text-xs">Visit project</span>
               </a>
             </Button>
           )}
@@ -100,7 +100,7 @@ const ProjectCard = ({ title, description, technologies, tag, liveUrl, githubUrl
             <Button asChild size="sm" variant="outline" className="flex-1 bg-card hover:bg-pool-cream border border-black rounded-none shadow-retro-sm hover:translate-y-0.5 hover:shadow-none transition-all">
               <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="gap-2">
                 <ExternalLink className="h-4 w-4" />
-                <span className="font-mono uppercase text-xs">Source</span>
+                <span className="font-mono uppercase text-xs">View source</span>
               </a>
             </Button>
           )}

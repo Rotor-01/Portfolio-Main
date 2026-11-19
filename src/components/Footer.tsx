@@ -35,14 +35,14 @@ const Footer = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-primary text-primary-foreground border-t border-black py-2 px-4 lg:px-8 z-20 flex flex-wrap items-center justify-between font-mono text-xs uppercase tracking-widest">
       <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2" title="Session Time Elapsed">
+        <div className="flex items-center gap-2" title="Total time visiting this portfolio">
           <Clock className="w-4 h-4 text-pool-orange" />
-          <span>SESSION: {formatTime(timeElapsed)}</span>
+          <span>TIME HERE {formatTime(timeElapsed)}</span>
         </div>
-        <div className="hidden sm:flex items-center gap-2" title="Latest Commit">
+        <div className="hidden sm:flex items-center gap-2" title="Portfolio source code">
           <GitCommit className="w-4 h-4 text-pool-orange" />
           <a href="https://github.com/Rotor-01/Portfolio-Main" target="_blank" rel="noreferrer" className="hover:text-pool-cream hover:underline transition-all">
-            b5f95e5
+            Site source
           </a>
         </div>
       </div>

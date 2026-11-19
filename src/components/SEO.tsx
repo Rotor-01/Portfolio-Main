@@ -9,13 +9,13 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = 'Roshan Tom Robinson',
-  description = 'Computer Engineering enthusiast focusing on AI hardware and networking. View my portfolio, projects, and skills.',
-  keywords = 'front-end developer, software developer, react, typescript, web development, portfolio',
+  title,
+  description = 'I’m Roshan Tom Robinson. I plan to study computer engineering, with a focus on embedded systems, data centers, and networking.',
+  keywords = 'Roshan Tom Robinson, computer engineering, embedded systems, data centers, networking, firmware, Linux',
   ogImage = '/images/og-image.jpg',
   ogUrl = 'https://roshan-portfolio.vercel.app',
 }: SEOProps) => {
-  const siteTitle = title;
+  const siteTitle = title ? `${title} | Roshan Tom Robinson` : 'Roshan Tom Robinson | Computer Engineering';
 
   return (
     <Helmet>
@@ -31,17 +31,13 @@ const SEO = ({
       <meta property="og:image" content={ogImage} />
 
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={ogUrl} />
-      <meta property="twitter:title" content={siteTitle} />
-      <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={ogImage} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={ogUrl} />
+      <meta name="twitter:title" content={siteTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
 
-      {/* Favicon */}
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="apple-touch-icon" href="/favicon.png" />
       <link rel="manifest" href="/site.webmanifest" />
     </Helmet>
   );

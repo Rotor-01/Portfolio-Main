@@ -5,36 +5,40 @@ import { Folder } from 'lucide-react';
 const Skills = () => {
   const skillCategories = [
     {
-      name: "Core Programming",
-      skills: ['Python', 'C / C++', 'CUDA', 'Bash', 'Go']
+      name: 'Programming languages',
+      description: 'I want to use C and C++ for firmware, Python to test devices, and Bash to automate routine work on Linux servers.',
+      skills: ['C', 'C++', 'Python', 'Bash']
     },
     {
-      name: "Hardware & Architecture",
-      skills: ['Enterprise Architecture', 'Hardware Interconnects', 'FPGA / ASIC']
+      name: 'Embedded systems',
+      description: 'My starting point is an ESP32 reading a sensor over I²C. From there I want to try SPI peripherals, read debug messages over UART, and schedule tasks with FreeRTOS.',
+      skills: ['ESP32', 'FreeRTOS', 'GPIO', 'I²C', 'SPI', 'UART', 'Logic analyzer']
     },
     {
-      name: "Networking & Infra",
-      skills: ['RDMA & InfiniBand', 'SDN', 'Linux Admin', 'TCP/IP']
+      name: 'Data centers',
+      description: 'I want to learn how a physical server hosts virtual machines, how services run in containers, and how operators spot a disk filling up or a CPU running hot.',
+      skills: ['Linux', 'KVM', 'Docker', 'Ansible', 'Prometheus', 'Grafana']
     },
     {
-      name: "MLOps & Deployment",
-      skills: ['Docker', 'Kubernetes', 'Server Clusters']
+      name: 'Networking',
+      description: 'I want to trace a packet from a device to a server, see where a switch or router forwards it, and use Wireshark to inspect the exchange.',
+      skills: ['Ethernet', 'TCP/IP', 'Subnetting', 'VLANs', 'Routing', 'DNS', 'DHCP', 'Wireshark']
     }
   ];
 
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream">
-      <SEO title="Skills" />
+      <SEO title="Skills" description="The languages, boards, and infrastructure tools I plan to learn for embedded systems, data centers, and networking." />
       <div className="grain-overlay" />
 
       <div className="max-w-5xl mx-auto">
         <div className="mb-12 text-center">
           <h1 className="text-4xl sm:text-5xl font-serif font-bold mb-4 italic text-foreground">
-            Technical Arsenal
+            Skills I want to build
           </h1>
           <div className="w-24 h-1 bg-primary mx-auto mb-6" />
           <p className="text-lg font-mono text-muted-foreground max-w-2xl mx-auto">
-            // Core capabilities in Computer Engineering, AI Hardware, and Infrastructure.
+            My computer engineering learning plan, from the code on a microcontroller to the network that connects it to a server.
           </p>
         </div>
 
@@ -52,6 +56,7 @@ const Skills = () => {
                 </h2>
               </div>
 
+              <p className="mb-5 text-muted-foreground">{category.description}</p>
               <div className="flex flex-wrap gap-4">
                 {category.skills.map((skill, index) => (
                   <SkillBadge
@@ -66,9 +71,9 @@ const Skills = () => {
         </div>
 
         <div className="mt-16 bg-primary text-primary-foreground border border-black shadow-retro p-8 text-center animate-fade-in-up">
-          <h2 className="font-serif text-2xl font-bold mb-4 italic">Transitioning to AI Hardware & Networking</h2>
+          <h2 className="font-serif text-2xl font-bold mb-4 italic">A first experiment</h2>
           <p className="font-sans text-lg opacity-90 max-w-2xl mx-auto">
-            I am focusing on Computer Engineering—managing multi-GPU topologies, high-speed interconnects, and orchestrating enterprise AI infrastructure.
+            I’d like to send temperature readings from an ESP32 to a Linux server. Watching those packets arrive and plotting the readings would give me a small way to practice all three areas together.
           </p>
         </div>
       </div>

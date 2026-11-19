@@ -16,14 +16,14 @@ const NotFound = () => {
         </h2>
         
         <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">
-          Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
+          This address doesn’t lead to a page in my portfolio. Head home to find my projects and study plans.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button asChild size="lg" className="hero-gradient text-white font-semibold hover:scale-105 transition-transform group">
             <Link to="/">
               <Home className="mr-2 h-5 w-5" />
-              Go Home
+              Portfolio home
             </Link>
           </Button>
           <Button 
@@ -35,7 +35,7 @@ const NotFound = () => {
           >
             <button>
               <ArrowLeft className="mr-2 h-5 w-5" />
-              Go Back
+              Previous page
             </button>
           </Button>
         </div>

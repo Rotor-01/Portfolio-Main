@@ -5,7 +5,7 @@ import SEO from '@/components/SEO';
 const About = () => {
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream">
-      <SEO title="About Me" />
+      <SEO title="About Roshan" description="Why I plan to study computer engineering and what interests me about firmware, networks, and the servers inside a data center." />
       <div className="grain-overlay" />
 
       <div className="max-w-4xl mx-auto">
@@ -14,7 +14,7 @@ const About = () => {
           <div className="bg-pool-blue text-white px-4 py-2 border-b border-black flex items-center justify-between">
             <span className="font-mono text-sm uppercase tracking-wider flex items-center gap-2">
               <User className="w-4 h-4" />
-              UserProfile.dat
+              Roshan.profile
             </span>
             <div className="flex gap-1">
               <div className="w-3 h-3 border border-black bg-white" />
@@ -34,24 +34,20 @@ const About = () => {
 
               <div className="flex-1 space-y-6">
                 <h1 className="text-4xl sm:text-5xl font-serif font-bold italic text-foreground">
-                  About Me
+                  Why computer engineering?
                 </h1>
 
                 <div className="space-y-4 font-sans text-lg leading-relaxed text-muted-foreground">
                   <p>
-                    Hello! I'm <span className="font-bold text-primary">Roshan Tom Robinson</span>,
-                    a Computer Engineering enthusiast transitioning into AI hardware, networking, and infrastructure.
+                    I’m <span className="font-bold text-primary">Roshan Tom Robinson</span>, from Kottayam, Kerala.
+                    Building for the web made me curious about what happens underneath it. When a device sends a reading, how does that number end up on a screen?
                   </p>
                   <p>
-                    I am focusing on building the backbone for AI systems using
-                    <span className="font-mono text-sm bg-pool-cream px-1 mx-1 border border-black/20">C/C++</span>
-                    and
-                    <span className="font-mono text-sm bg-pool-cream px-1 mx-1 border border-black/20">Python</span>.
-                    My goal is to master high-performance networking, hardware interconnects, and managing enterprise-level server clusters.
+                    I plan to study computer engineering to follow that question from one end to the other.
+                    Embedded systems interest me because I could write a few lines of C, move a sensor, and see exactly how the hardware responds.
                   </p>
                   <p>
-                    When I'm not coding, I'm likely exploring server topologies, delving into Linux kernel tuning,
-                    or expanding my understanding of parallel computing.
+                    I’m just as curious about the other end of the connection. I want to understand how routers get a packet to the right server and how data center teams keep services running when a machine goes offline.
                   </p>
                 </div>
 
@@ -67,13 +63,13 @@ const About = () => {
             </div>
 
             <div className="mt-12 pt-8 border-t border-black/10">
-              <h3 className="font-mono text-xl font-bold uppercase mb-6">Core Services</h3>
+              <h2 className="font-mono text-xl font-bold uppercase mb-6">Topics I want to explore</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
-                  'AI Hardware Configuration',
-                  'High-Performance Networking',
-                  'Cluster Orchestration (MLOps)',
-                  'Linux System Administration',
+                  'Microcontrollers and sensor interfaces',
+                  'Firmware timing and debugging',
+                  'Switching and routing',
+                  'Server hardware and virtualization',
                 ].map((item) => (
                   <div
                     key={item}
