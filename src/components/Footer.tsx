@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Clock, GitCommit, Palette } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Clock, GitCommit, Palette } from '@/components/Icons';
 import { useTheme } from '@/components/ThemeProvider';
 
 const Footer = () => {
@@ -13,18 +13,26 @@ const Footer = () => {
     return 0;
   });
 
-  useEffect(() => {
-    const timeInterval = setInterval(() => {
-      setTimeElapsed(prev => prev + 1);
-    }, 1000);
-    return () => clearInterval(timeInterval);
-  }, []);
+  const elapsed = useRef(timeElapsed);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('portfolio_time_elapsed', timeElapsed.toString());
-    }
-  }, [timeElapsed]);
+    const saveTime = () => localStorage.setItem('portfolio_time_elapsed', String(elapsed.current));
+    const saveWhenHidden = () => {
+      if (document.visibilityState === 'hidden') saveTime();
+    };
+    const timeInterval = setInterval(() => {
+      elapsed.current += 1;
+      setTimeElapsed(elapsed.current);
+    }, 1000);
+    window.addEventListener('pagehide', saveTime);
+    document.addEventListener('visibilitychange', saveWhenHidden);
+    return () => {
+      clearInterval(timeInterval);
+      window.removeEventListener('pagehide', saveTime);
+      document.removeEventListener('visibilitychange', saveWhenHidden);
+      saveTime();
+    };
+  }, []);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60).toString().padStart(2, '0');

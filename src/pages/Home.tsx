@@ -1,20 +1,22 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, Mail, FileText, Terminal, Palette, Check, Instagram } from 'lucide-react';
+import { ArrowRight, Github, Mail, FileText, Terminal, Palette, Check, Instagram } from '@/components/Icons';
 import SEO from '@/components/SEO';
 import { useEffect, useState } from 'react';
 import BentoCard from '@/components/BentoCard';
 import ProjectCard from '@/components/ProjectCard';
 import { projects } from '@/lib/projects';
+import tomImage from '@/assets/tom.webp';
+import jerryImage from '@/assets/jerry.webp';
 import { useTheme, Theme } from '@/components/ThemeProvider';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 
 const Home = () => {
   const [typedText, setTypedText] = useState('');
   const fullText = 'Focus: embedded systems';
   const { theme, setTheme } = useTheme();
-  const { toast } = useToast();
 
+  const [loadCharacters, setLoadCharacters] = useState(false);
   const [isHoveringTom, setIsHoveringTom] = useState(false);
   const [isEasterEggActive, setIsEasterEggActive] = useState(false);
   const [isRetreating, setIsRetreating] = useState(false);
@@ -63,15 +65,19 @@ const Home = () => {
           className="md:col-span-2 lg:col-span-3 min-h-[300px]"
         >
           <div className="p-8 sm:p-10 flex flex-col justify-center h-full">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 italic text-foreground leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6 italic text-foreground leading-tight sm:leading-none">
               I’m Roshan{' '}
               <span className="whitespace-nowrap sm:whitespace-normal">
                 <span 
                   className="relative inline-block cursor-help z-10"
-                  onMouseEnter={() => setIsHoveringTom(true)}
+                  onMouseEnter={() => {
+                    setLoadCharacters(true);
+                    setIsHoveringTom(true);
+                  }}
                   onMouseLeave={() => setIsHoveringTom(false)}
                   onClick={() => {
                     if (isEasterEggActive || isRetreating) return;
+                    setLoadCharacters(true);
                     setIsEasterEggActive(true);
                     setTimeout(() => {
                       setIsRetreating(true);
@@ -85,7 +91,7 @@ const Home = () => {
                 >
                   {/* Tom Cat Image */}
                   <img 
-                    src="/images/tom.png" 
+                    src={loadCharacters ? tomImage : undefined}
                     alt="" 
                     className={`absolute left-[20%] bottom-0 w-auto h-16 md:h-20 max-w-none object-contain transition-all duration-500 z-0 select-none pointer-events-none drop-shadow-2xl origin-bottom
                       ${(isHoveringTom || isEasterEggActive) && !isRetreating ? '-translate-y-[90%] -translate-x-1/2 opacity-100 -rotate-12 scale-100' : 'translate-y-0 -translate-x-1/2 opacity-0 rotate-0 scale-50'}
@@ -94,7 +100,7 @@ const Home = () => {
                   
                   {/* Jerry Mouse Image */}
                   <img 
-                    src="/images/jerry.png" 
+                    src={loadCharacters ? jerryImage : undefined}
                     alt="" 
                     className={`absolute left-[80%] bottom-0 w-auto h-16 md:h-20 max-w-none object-contain transition-all duration-500 z-0 select-none pointer-events-none drop-shadow-2xl origin-bottom
                       ${isEasterEggActive && !isRetreating ? '-translate-y-[85%] -translate-x-1/3 opacity-100 rotate-12 scale-100' : 'translate-y-0 -translate-x-1/2 opacity-0 rotate-0 scale-50 delay-100'}
@@ -108,7 +114,7 @@ const Home = () => {
                 <span className="text-primary not-italic inline-block sm:inline mt-1 sm:mt-0">Robinson</span>
               </span>
             </h1>
-            <p className="text-lg sm:text-xl font-mono text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+            <p className="text-lg sm:text-xl font-mono text-muted-foreground mb-8 max-w-2xl leading-relaxed sm:leading-7">
               I plan to study computer engineering, with a focus on embedded systems, data centers, and networking.
               I want to follow a sensor reading all the way from a pin on a chip to a server across the network.
             </p>
@@ -240,7 +246,7 @@ const Home = () => {
               <li>Run a service in a Linux VM.</li>
             </ul>
             <div className="mt-4 pt-4 border-t border-white/10 flex justify-between">
-               <Link to="/skills" className="text-pool-orange hover:text-white hover:underline tracking-widest text-[10px] uppercase">Skills to build</Link>
+               <Link to="/skills" className="text-pool-orange hover:text-white hover:underline tracking-widest text-[10px] leading-4 uppercase">Skills to build</Link>
                <span className="animate-pulse w-2 h-4 bg-pool-orange inline-block"></span>
             </div>
           </div>
@@ -253,7 +259,7 @@ const Home = () => {
              <div className="absolute inset-0 pointers-events-none opacity-5" style={{ backgroundImage: 'linear-gradient(transparent 95%, #000 100%)', backgroundSize: '100% 24px' }}></div>
              <p className="text-muted-foreground italic mb-6 relative z-10">Embedded project ideas</p>
              <div className="space-y-6 relative pl-4 z-10">
-                <div className="absolute left-0 top-1 bottom-1 w-px bg-pool-orange/30"></div>
+                <div className="absolute left-0 top-1 bottom-1 mb-0! w-px bg-pool-orange/30"></div>
                 <div className="group">
                   <h4 className="font-bold mb-1 group-hover:text-primary transition-colors text-sm">Smart Beyblade</h4>
                   <p className="text-muted-foreground">Could a spinning top measure its speed and send each hit to a phone over Bluetooth?</p>

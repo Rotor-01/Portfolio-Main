@@ -1,6 +1,6 @@
 import SkillBadge from '@/components/SkillBadge';
 import SEO from '@/components/SEO';
-import { Folder } from 'lucide-react';
+import { Folder } from '@/components/Icons';
 
 const Skills = () => {
   const skillCategories = [
@@ -50,7 +50,7 @@ const Skills = () => {
               style={{ animationDelay: `${catIndex * 150}ms` }}
             >
               <div className="flex items-center gap-3 mb-6 border-b border-black/10 pb-4">
-                <Folder className="w-6 h-6 text-primary fill-primary/20" />
+                <Folder className="w-6 h-6 text-primary fill-[hsl(var(--primary)/0.2)]" />
                 <h2 className="font-mono text-xl font-bold uppercase tracking-wider">
                   {category.name}
                 </h2>

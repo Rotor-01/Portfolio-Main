@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, GitBranch } from 'lucide-react';
+import { Menu, X, Sun, GitBranch } from '@/components/Icons';
 import { Button } from '@/components/ui/button';
 
-const Navigation = () => {
+function NavigationBar({ pathname }: { pathname: string }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [time, setTime] = useState(new Date());
-  const location = useLocation();
+  const [time, setTime] = useState(() => new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
+    let timer: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      const now = new Date();
+      setTime(now);
+      timer = setTimeout(tick, 60_000 - (now.getTime() % 60_000));
+    };
+    timer = setTimeout(tick, 60_000 - (Date.now() % 60_000));
+    return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
 
   const navLinks = [
     { path: '/', label: 'Home' },
@@ -46,7 +47,7 @@ const Navigation = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`px-4 py-1.5 font-mono text-sm uppercase tracking-wider border border-transparent hover:border-black hover:bg-pool-cream hover:text-foreground transition-all ${location.pathname === link.path ? 'bg-primary text-primary-foreground border-black' : 'text-foreground'
+              className={`px-4 py-1.5 font-mono text-sm uppercase tracking-wider border border-transparent hover:border-black hover:bg-pool-cream hover:text-foreground transition-all ${pathname === link.path ? 'bg-primary text-primary-foreground border-black' : 'text-foreground'
                 }`}
             >
               {link.label}
@@ -90,7 +91,7 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-3 font-mono text-lg uppercase border border-transparent hover:border-black hover:bg-pool-cream hover:text-foreground transition-all ${location.pathname === link.path ? 'bg-primary text-primary-foreground border-black' : ''
+                className={`px-4 py-3 font-mono text-lg uppercase border border-transparent hover:border-black hover:bg-pool-cream hover:text-foreground transition-all ${pathname === link.path ? 'bg-primary text-primary-foreground border-black' : ''
                   }`}
               >
                 {link.label}
@@ -103,4 +104,7 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default function Navigation() {
+  const { key, pathname } = useLocation();
+  return <NavigationBar key={key} pathname={pathname} />;
+}

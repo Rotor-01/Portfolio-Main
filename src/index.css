@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss" source(none);
+@config "../tailwind.config.ts";
+@source "./";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+@custom-variant hover (&:hover);
 
 @layer base {
   :root {
@@ -123,6 +127,10 @@
     scrollbar-gutter: stable;
   }
   
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
   * {
     @apply border-border;
   }
