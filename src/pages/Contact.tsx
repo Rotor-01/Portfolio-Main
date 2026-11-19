@@ -1,6 +1,6 @@
-import { Phone, MapPin, Mail, Github, Linkedin, Instagram, Send } from 'lucide-react';
+import { Phone, MapPin, Mail, Github, Linkedin, Instagram, Send } from '@/components/Icons';
 import SEO from '@/components/SEO';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 
 const XLogo = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -9,7 +9,6 @@ const XLogo = ({ className }: { className?: string }) => (
 );
 
 const Contact = () => {
-  const { toast } = useToast();
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-pool-cream">
       <SEO title="Contact" description="Get in touch with Roshan Tom Robinson to exchange embedded project ideas, home lab notes, or advice on studying computer engineering." />

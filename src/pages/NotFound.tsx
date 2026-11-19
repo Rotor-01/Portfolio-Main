@@ -1,14 +1,16 @@
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Home, ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft } from '@/components/Icons';
 
 const NotFound = () => {
   return (
     <main className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <SEO />
       <div className="text-center animate-fade-in-up">
         <div className="mb-8">
           <h1 className="text-9xl font-bold text-gradient mb-4">404</h1>
-          <div className="h-1.5 w-24 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mb-6" />
+          <div className="h-1.5 w-24 bg-linear-to-r/srgb from-primary to-accent rounded-full mx-auto mb-6" />
         </div>
         
         <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">

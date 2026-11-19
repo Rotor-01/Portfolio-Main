@@ -4,7 +4,7 @@ I’m Roshan Tom Robinson, and I plan to study computer engineering. This portfo
 
 ![Portfolio Preview](./public/images/projects/portfolio.png)
 
-![React](https://img.shields.io/badge/React-18-blue.svg) ![Vite](https://img.shields.io/badge/Vite-5-purple.svg) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-teal.svg)
+![React](https://img.shields.io/badge/React-19-blue.svg) ![Vite](https://img.shields.io/badge/Vite-8-purple.svg) ![TypeScript](https://img.shields.io/badge/TypeScript-7-blue.svg) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-teal.svg)
 
 ## Learning plans
 

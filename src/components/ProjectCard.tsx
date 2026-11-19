@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, Eye, Maximize2, Minus, X } from 'lucide-react';
+import { ExternalLink, Eye, Maximize2, Minus, X } from '@/components/Icons';
 
 interface ProjectCardProps {
   title: string;

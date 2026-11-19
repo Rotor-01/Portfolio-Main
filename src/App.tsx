@@ -1,46 +1,45 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense } from "react";
+import { useToast } from "@/hooks/use-toast";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
-import SEO from "./components/SEO";
 import { ThemeProvider } from "./components/ThemeProvider";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Skills from "./pages/Skills";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 
-const queryClient = new QueryClient();
+const About = lazy(() => import("./pages/About"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Skills = lazy(() => import("./pages/Skills"));
+const Contact = lazy(() => import("./pages/Contact"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Toaster = lazy(() => import("@/components/ui/toaster"));
+
+function Notifications() {
+  const message = useToast();
+  if (!message) return null;
+  return (
+    <Suspense fallback={null}>
+      <Toaster message={message} />
+    </Suspense>
+  );
+}
 
 const App = () => (
   <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <SEO />
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-          <Navigation />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </HelmetProvider>
+    <Notifications />
+    <BrowserRouter>
+      <Navigation />
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+      <Footer />
+    </BrowserRouter>
   </ThemeProvider>
 );
 

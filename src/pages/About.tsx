@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Download, User } from 'lucide-react';
+import { Download, User } from '@/components/Icons';
 import SEO from '@/components/SEO';
 
 const About = () => {
